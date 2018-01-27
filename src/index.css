@@ -1,0 +1,139 @@
+.App {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.todoHeader {
+  font-family: 'Segoe Print', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar label {
+  font-family: 'Segoe Print', sans-serif;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+.searchBar input[type="text"] {
+  font-family: 'Segoe Print', sans-serif;
+  width: 230px;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks {
+  width: 69%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tasks form {
+  align-self: flex-end;
+}
+
+.tasks ul {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.tasks ul li {
+  font-family: 'Segoe Print', sans-serif;
+  padding: 20px;
+  font-size: 17px;
+}
+
+.tasks ul li input[type="checkbox"] {
+  margin: 0 40px 0 10px;
+}
+
+.form-inline {
+  font-family: 'Segoe Print', sans-serif;
+}
+
+.categories {
+  width: 29%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categoriesBar {
+  width:100%;
+  overflow-y: scroll;
+}
+
+.categories ul li {
+  cursor: pointer;
+}
+
+.singleCategory {
+  padding: 0 20px;
+  font-size: 15px;
+  font-family: 'Segoe Print', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.RemoveCategory{
+  font-style: normal;
+  font-size: 16px;
+  padding: -2px;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 32px;
+}
+
+.categoriesName {
+  color: rgb(11, 184, 236);
+}
+
+.singleCategory button{
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border-radius: 3px;
+  border-width: 1px;
+  background: #fff;
+  border-color: #f6f6f6;
+}
+
+.singleCategory button:hover{
+  background: #dfdfdf;
+  border-color: #dfdfdf;
+}
+
+.subcategories {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.subcategories ul {
+  width: 85%;
+  margin: 0px;
+}
