@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Content = (props) => {
+const Content = ({ parts }) => {
   return (
     <>
-      {props.parts.map((value, index) => (
+      {parts.map((value, index) => (
         <p key={index}>{value.name + ' ' + value.exercises}</p>
       ))}
     </>
   )
 }
 
-export default Content;
+export default Content
