@@ -2,8 +2,8 @@ import React from 'react'
 
 import StatisticLine from './statisticLine'
 
-const Statistics = ({ allClicks }) => {
-  const { good, neutral, bad } = allClicks;
+const Statistics = ({ allFeedbacks }) => {
+  const { good, neutral, bad } = allFeedbacks;
   if (good === 0 && neutral === 0 && bad === 0) {
     return <div>No feedback given</div>
   }

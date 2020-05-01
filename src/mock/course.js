@@ -1,5 +1,5 @@
 const course = {
-  name: 'Half Stack application development',
+  name: 'About the exercises in this course',
   parts: [
     {
       name: 'Fundamentals of React',
@@ -13,9 +13,7 @@ const course = {
       name: 'State of a component',
       exercises: 14
     }
-  ],
-  feedback: 'give feedback',
-  statistics: 'statistics'
+  ]
 }
 
 export default course
