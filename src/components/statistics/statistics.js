@@ -1,6 +1,6 @@
 import React from 'react'
 
-import StatisticLine from './StatisticLine'
+import StatisticLine from './statisticLine'
 
 const Statistics = ({ allClicks }) => {
   const { good, neutral, bad } = allClicks;
