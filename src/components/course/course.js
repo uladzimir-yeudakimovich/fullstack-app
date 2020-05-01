@@ -8,11 +8,11 @@ import course from '../../mock/course'
 
 const Course = () => {
   return (
-    <div>
+    <>
       <Header name={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
-    </div>
+    </>
   )
 }
 

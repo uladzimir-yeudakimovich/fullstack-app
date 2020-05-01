@@ -7,11 +7,11 @@ import Anecdotes from './components/anecdotes/anecdotes'
 
 const App = () => {
   return (
-    <div>
+    <>
       <Course />
       <Feedback />
       <Anecdotes />
-    </div>
+    </>
   )
 }
 

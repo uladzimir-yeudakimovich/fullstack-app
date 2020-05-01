@@ -13,14 +13,14 @@ const Statistics = ({ allFeedbacks }) => {
   const positive = (good / all) * 100 + ' %';
 
   return (
-    <div>
+    <>
       <StatisticLine name='good' counter={good}/>
       <StatisticLine name='neutral' counter={neutral}/>
       <StatisticLine name='bad' counter={bad}/>
       <StatisticLine name='all' counter={all}/>
       <StatisticLine name='average' counter={average}/>
       <StatisticLine name='positive' counter={positive}/>
-    </div>
+    </>
   )
 }
 

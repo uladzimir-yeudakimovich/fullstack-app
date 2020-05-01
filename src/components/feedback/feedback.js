@@ -26,7 +26,7 @@ const Feedback = () => {
   }
 
   return (
-    <div>
+    <>
       <Header name='give feedback' />
       <Button
         handleClick={increaseGood}
@@ -42,7 +42,7 @@ const Feedback = () => {
       />
       <Header name='statistics' />
       <Statistics allFeedbacks={allFeedbacks} />
-    </div>
+    </>
   )
 }
 
