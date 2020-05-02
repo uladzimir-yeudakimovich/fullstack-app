@@ -34,7 +34,7 @@ const PhoneBook = () => {
   }
 
   return (
-    <div>
+    <>
       <h2>Phonebook</h2>
       <Filter searchChange={searchNameChange} />
       <h3>Add a new</h3>
@@ -47,7 +47,7 @@ const PhoneBook = () => {
       />
       <h3>Numbers</h3>
       <Persons persons={personsToShow}/>
-    </div>
+    </>
   )
 }
 
