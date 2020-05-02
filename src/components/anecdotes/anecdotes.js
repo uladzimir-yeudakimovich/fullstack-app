@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import Header from '../shared/header'
+import Display from './display'
 import Button from '../shared/button'
 
 import anecdotes from '../../mock/anecdotes'
@@ -14,31 +15,22 @@ const Anecdotes = () => {
     allVotes[selected] += 1
     setVotes([ ...allVotes ])
   }
+  const compareNumeric = (a, b) => {
+    if (a > b) return 1;
+    if (a === b) return 0;
+    if (a < b) return -1;
+  }
+  const mostValue = [...allVotes].sort(compareNumeric)[anecdotes.length - 1];
+  const mostVotes = allVotes.indexOf(mostValue)
 
   return (
     <>
       <Header name='Anecdotes of the day' />
-      <div>
-        {anecdotes[selected]}
-      </div>
-      <div>
-        has {allVotes[selected]} votes
-      </div>
-      <Button
-        handleClick={voteAnecdote}
-        text='vote'
-      />
-      <Button
-        handleClick={nextAnecdote}
-        text='next anecdote'
-      />
+      <Display text={anecdotes[selected]} number={allVotes[selected]} />
+      <Button handleClick={voteAnecdote} text='vote' />
+      <Button handleClick={nextAnecdote} text='next anecdote' />
       <Header name='Anecdotes with most votes' />
-      <div>
-        {anecdotes[selected]}
-      </div>
-      <div>
-        has {allVotes[selected]} votes
-      </div>
+      <Display text={anecdotes[mostVotes]} number={allVotes[mostVotes]} />
     </>
   )
 }

@@ -28,18 +28,9 @@ const Feedback = () => {
   return (
     <>
       <Header name='give feedback' />
-      <Button
-        handleClick={increaseGood}
-        text='good'
-      />
-      <Button
-        handleClick={increaseNeutral}
-        text='neutral'
-      />     
-      <Button
-        handleClick={increaseBad}
-        text='bad'
-      />
+      <Button handleClick={increaseGood} text='good' />
+      <Button handleClick={increaseNeutral} text='neutral' />     
+      <Button handleClick={increaseBad} text='bad' />
       <Header name='statistics' />
       <Statistics allFeedbacks={allFeedbacks} />
     </>
