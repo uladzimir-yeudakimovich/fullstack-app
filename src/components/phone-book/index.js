@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
 
-import users from '../../mock/phone-book'
-
 const PhoneBook = () => {
-  const [ persons, setPersons] = useState(users)
+  const [ persons, setPersons] = useState([])
+  const [ personsToShow, setPersonsToShow ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newPhone, setNewPhone ] = useState('')
-  const [ personsToShow, setPersonsToShow ] = useState([...persons])
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+        setPersonsToShow(response.data)
+      })
+  }, [])
 
   const handleNewNameChange = (event) => setNewName(event.target.value)
   const handleNewPhoneChange = (event) => setNewPhone(event.target.value)
