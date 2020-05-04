@@ -5,7 +5,7 @@ import Filter from './filter'
 import Display from './display' 
 
 const Countries = () => {
-  const [ countries, setCountries] = useState([])
+  const [ countries, setCountries ] = useState([])
   const [ countriesToShow, setCountriesToShow ] = useState([])
 
   useEffect(() => {

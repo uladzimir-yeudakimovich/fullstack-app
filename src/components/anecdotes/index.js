@@ -7,8 +7,8 @@ import Button from '../shared/button'
 import anecdotes from '../../mock/anecdotes'
 
 const Anecdotes = () => {
-  const [selected, setSelected] = useState(0)
-  const [allVotes, setVotes] = useState(new Uint8Array(anecdotes.length))
+  const [ selected, setSelected ] = useState(0)
+  const [ allVotes, setVotes ] = useState(new Uint8Array(anecdotes.length))
 
   const nextAnecdote = () => setSelected(Math.floor(Math.random() * anecdotes.length))
   const voteAnecdote = () => {
