@@ -20,7 +20,7 @@ const Display = ({ countries }) => {
     return (
       <ShowOne index={0} countries={countries}/>
     )
-  } else {
+  } else if (countries.length !== 0) {
     return (
       <ShowMany
         showInfo={showInfo}
@@ -28,6 +28,10 @@ const Display = ({ countries }) => {
         showCountry={showCountry}
         index={index}
       />
+    )
+  } else {
+    return (
+      <p>Not found</p>
     )
   }
 }
