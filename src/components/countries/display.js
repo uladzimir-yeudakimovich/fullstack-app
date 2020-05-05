@@ -7,8 +7,8 @@ const Display = ({ countries }) => {
   const [ showInfo, setShowInfo ] = useState(false)
   const [ index, setIndex ] = useState()
 
-  const showCountry = (event) => {
-    setIndex(+event.target.id)
+  const showCountry = id => {
+    setIndex(+id)
     setShowInfo(!showInfo)
   }
 

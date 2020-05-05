@@ -1,10 +1,15 @@
 import React from 'react'
 
-const Persons = ({ persons }) => {
+import Button from '../shared/button'
+
+const Persons = ({ persons, deletePerson }) => {
   return (
     <ul>
       {persons.map((person, i) => 
-        <li key={i}>{person.name} {person.number}</li>
+        <li key={i}>
+          {person.name} {person.number}
+          <Button handleClick={() => deletePerson(person.id)} text="delete" />
+        </li>
       )}
     </ul>
   )

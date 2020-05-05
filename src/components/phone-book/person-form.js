@@ -1,8 +1,10 @@
 import React from 'react'
 
+import Button from '../shared/button'
+
 const PersonForm = ({ submit, name, changeName, number, changeNumber }) => {
   return (
-    <form onSubmit={submit}>
+    <form>
       <div>
         name: <input
           value={name}
@@ -15,7 +17,7 @@ const PersonForm = ({ submit, name, changeName, number, changeNumber }) => {
           onChange={changeNumber}
         />
       </div>
-      <button type="submit">add</button>
+      <Button handleClick={submit} text="add" />
     </form>
   )
 }

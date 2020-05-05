@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Button from '../shared/button'
 import ShowOne from './show-one'
 
 const ShowMany = ({ showInfo, countries, showCountry, index }) => {
@@ -9,7 +10,7 @@ const ShowMany = ({ showInfo, countries, showCountry, index }) => {
         {countries.map((country, i) => 
           <p key={i}>
             {country.name}
-            <button id={i} onClick={showCountry}>show</button>
+            <Button handleClick={() => showCountry(i)} text="show" />
           </p>
         )}
       </>
@@ -19,7 +20,7 @@ const ShowMany = ({ showInfo, countries, showCountry, index }) => {
       <>
         <p>
           {countries[index].name}
-          <button onClick={showCountry}>hide</button>
+          <Button handleClick={showCountry} text="hide" />
         </p>
         <ShowOne index={index} countries={countries}/>
       </>

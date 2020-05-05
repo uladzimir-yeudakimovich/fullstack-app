@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 
 // import Course from './components/course/index'
 // import Feedback from './components/feedback/index'
 // import Anecdotes from './components/anecdotes/index'
-// import PhoneBook from './components/phone-book/index'
-import Countries from './components/countries/index'
+import PhoneBook from './components/phone-book/index'
+// import Countries from './components/countries/index'
 
 const App = () => {
   return (
@@ -13,8 +14,8 @@ const App = () => {
       {/* <Course /> */}
       {/* <Feedback /> */}
       {/* <Anecdotes /> */}
-      {/* <PhoneBook /> */}
-      <Countries />
+      <PhoneBook />
+      {/* <Countries /> */}
     </>
   )
 }

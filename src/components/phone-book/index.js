@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
+import rest from './rest'
 
 const PhoneBook = () => {
   const [ persons, setPersons] = useState([])
@@ -12,11 +12,10 @@ const PhoneBook = () => {
   const [ newPhone, setNewPhone ] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
+    rest.getAll()
       .then(response => {
-        setPersons(response.data)
-        setPersonsToShow(response.data)
+        setPersons(response)
+        setPersonsToShow(response)
       })
   }, [])
 
@@ -26,7 +25,7 @@ const PhoneBook = () => {
     setPersonsToShow(persons.filter(person => person.name.includes(event.target.value)))
   }
 
-  const addPerson = (event) => {
+  const addPerson = event => {
     event.preventDefault()
     const personObject = {
       name: newName,
@@ -34,13 +33,32 @@ const PhoneBook = () => {
       id: persons.length + 1,
     }
     const findPerson = persons.find(person => person.name === newName);
-    if (findPerson) return alert(`${newName} is already added to phonebook`)
-    axios
-      .post('http://localhost:3001/persons', personObject)
-    setPersons(persons.concat(personObject))
-    setPersonsToShow(personsToShow.concat(personObject))
+    
+    if (findPerson) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        rest.update(findPerson.id, personObject)
+          .then(response => {
+            setPersons(persons.map(el => el.id !== findPerson.id ? el : response))
+            setPersonsToShow(personsToShow.map(el => el.id !== findPerson.id ? el : response))
+          })
+      }
+    } else {
+      rest.create(personObject)
+      setPersons(persons.concat(personObject))
+      setPersonsToShow(personsToShow.concat(personObject))
+    }
+
     setNewName('')
     setNewPhone('')
+  }
+
+  const deletePerson = id => {
+    const person = persons.find(el => el.id === id)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      rest.remove(id)
+      setPersons(persons.filter(el => el.id !== id))
+      setPersonsToShow(personsToShow.filter(el => el.id !== id))
+    }
   }
 
   return (
@@ -56,7 +74,7 @@ const PhoneBook = () => {
         changeNumber={handleNewPhoneChange}
       />
       <h3>Numbers</h3>
-      <Persons persons={personsToShow}/>
+      <Persons persons={personsToShow} deletePerson={deletePerson} />
     </>
   )
 }
