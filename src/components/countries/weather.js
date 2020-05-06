@@ -1,7 +1,10 @@
 import React from 'react'
 
-const Weather = ({ weather }) => {
-  if (weather) {
+import Notification from '../shared/notification'
+
+const Weather = ({ weather, errorMessage }) => {
+  if (weather.length) {
+    console.log(weather)
     return (
       <>
         <p><strong>temperature:</strong> {weather.temperature} Celcius</p>
@@ -10,7 +13,9 @@ const Weather = ({ weather }) => {
       </>
     )
   }
-  return <></>
+  return (
+    <Notification message={errorMessage} />
+  )
 }
 
 export default Weather
