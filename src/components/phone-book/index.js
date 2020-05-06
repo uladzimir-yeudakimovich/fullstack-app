@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
-import rest from './rest'
+import REST from './rest'
 import Notification from '../shared/notification'
 
 const PhoneBook = () => {
@@ -14,7 +14,7 @@ const PhoneBook = () => {
   const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
-    rest.getAll()
+    REST.getAll()
       .then(response => {
         setPersons(response)
         setPersonsToShow(response)
@@ -29,51 +29,46 @@ const PhoneBook = () => {
 
   const addPerson = event => {
     event.preventDefault()
-    const personObject = {
+    const newPerson = {
       name: newName,
       number: newPhone,
       id: persons.length + 1,
     }
     const findPerson = persons.find(person => person.name === newName);
-    
-    if (findPerson) {
-      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        rest
-          .update(findPerson.id, personObject).then(response => {
-            setPersons(persons.map(el => el.id !== findPerson.id ? el : response))
-            setPersonsToShow(personsToShow.map(el => el.id !== findPerson.id ? el : response))
-          })
-          .catch(error => {
-            setErrorMessage(
-              `Information of ${findPerson.name} has already been removed from server`
-            )
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 5000)
-            setPersons(persons.filter(n => n.id !== findPerson.id))
-            setPersonsToShow(persons.filter(n => n.id !== findPerson.id))
-          })
-      }
-    } else {
-      rest.create(personObject)
-      setPersons(persons.concat(personObject))
-      setPersonsToShow(personsToShow.concat(personObject))
-      setErrorMessage({
-        success: `Added ${personObject.name}`
-      })
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-    }
-
+    findPerson ? updataPersone(findPerson, newPerson) : createPersone(newPerson)
     setNewName('')
     setNewPhone('')
+  }
+
+  const updataPersone = (user, data) => {
+    if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+      const { id, name } = user
+      REST
+        .update(id, data).then(response => {
+          setPersons(persons.map(el => el.id !== id ? el : response))
+          setPersonsToShow(personsToShow.map(el => el.id !== id ? el : response))
+        })
+        .catch(error => {
+          setErrorMessage(`Information of ${name} has already been removed from server`)
+          setTimeout(() => setErrorMessage(null), 5000)
+          setPersons(persons.filter(n => n.id !== id))
+          setPersonsToShow(persons.filter(n => n.id !== id))
+        })
+    }
+  }
+
+  const createPersone = user => {
+    REST.create(user)
+    setPersons(persons.concat(user))
+    setPersonsToShow(personsToShow.concat(user))
+    setErrorMessage({ success: `Added ${user.name}` })
+    setTimeout(() => setErrorMessage(null), 5000)
   }
 
   const deletePerson = id => {
     const person = persons.find(el => el.id === id)
     if (window.confirm(`Delete ${person.name}?`)) {
-      rest.remove(id)
+      REST.remove(id)
       setPersons(persons.filter(el => el.id !== id))
       setPersonsToShow(personsToShow.filter(el => el.id !== id))
     }
