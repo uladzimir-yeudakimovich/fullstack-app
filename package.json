@@ -1,5 +1,5 @@
 {
-  "name": "fullstack-app",
+  "name": "fullstack-app-front-end",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,6 +18,8 @@
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch src/mock/persons.json"
   },
+  "author": "Uladzimir Yeudakimovich",
+  "license": "MIT",
   "eslintConfig": {
     "extends": "react-app"
   },
