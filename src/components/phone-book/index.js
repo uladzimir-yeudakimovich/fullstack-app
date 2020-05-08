@@ -31,8 +31,7 @@ const PhoneBook = () => {
     event.preventDefault()
     const newPerson = {
       name: newName,
-      number: newPhone,
-      id: persons.length + 1,
+      number: newPhone
     }
     const findPerson = persons.find(person => person.name === newName);
     findPerson ? updataPersone(findPerson, newPerson) : createPersone(newPerson)
@@ -49,10 +48,12 @@ const PhoneBook = () => {
           setPersonsToShow(personsToShow.map(el => el.id !== id ? el : response))
         })
         .catch(error => {
-          setErrorMessage(`Information of ${name} has already been removed from server`)
+          if (error.message.includes('status code 400')) {
+            setErrorMessage(`Number is requared for user ${name}, enter and try again.`)
+          } else {
+            setErrorMessage(`${error.message}`)
+          }
           setTimeout(() => setErrorMessage(null), 5000)
-          setPersons(persons.filter(n => n.id !== id))
-          setPersonsToShow(persons.filter(n => n.id !== id))
         })
     }
   }
