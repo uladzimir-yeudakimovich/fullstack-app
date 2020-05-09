@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
-import REST from './rest'
+import service from './persons.service'
 import Notification from '../shared/notification'
 
 const PhoneBook = () => {
@@ -14,7 +14,7 @@ const PhoneBook = () => {
   const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
-    REST.getAll()
+    service.getAll()
       .then(response => {
         setPersons(response)
         setPersonsToShow(response)
@@ -42,7 +42,7 @@ const PhoneBook = () => {
   const updataPersone = (user, data) => {
     if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
       const { id, name } = user
-      REST
+      service
         .update(id, data).then(response => {
           setPersons(persons.map(el => el.id !== id ? el : response))
           setPersonsToShow(personsToShow.map(el => el.id !== id ? el : response))
@@ -59,17 +59,22 @@ const PhoneBook = () => {
   }
 
   const createPersone = user => {
-    REST.create(user)
-    setPersons(persons.concat(user))
-    setPersonsToShow(personsToShow.concat(user))
-    setErrorMessage({ success: `Added ${user.name}` })
-    setTimeout(() => setErrorMessage(null), 5000)
+    service.create(user).then(response => {
+      setPersons(persons.concat(user))
+      setPersonsToShow(personsToShow.concat(user))
+      setErrorMessage({ success: `Added ${user.name}` })
+      setTimeout(() => setErrorMessage(null), 5000)
+    })
+    .catch(error => {
+      setErrorMessage(`${error.message}`)
+      setTimeout(() => setErrorMessage(null), 5000)
+    })
   }
 
   const deletePerson = id => {
     const person = persons.find(el => el.id === id)
     if (window.confirm(`Delete ${person.name}?`)) {
-      REST.remove(id)
+      service.remove(id)
       setPersons(persons.filter(el => el.id !== id))
       setPersonsToShow(personsToShow.filter(el => el.id !== id))
     }
