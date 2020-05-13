@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
-import service from './persons.service'
+import service from '../services/persons.service'
 import Notification from '../shared/notification'
 
 const PhoneBook = () => {
@@ -59,7 +59,7 @@ const PhoneBook = () => {
   }
 
   const createPersone = user => {
-    service.create(user).then(response => {
+    service.create(user).then(() => {
       setPersons(persons.concat(user))
       setPersonsToShow(personsToShow.concat(user))
       setErrorMessage({ success: `Added ${user.name}` })

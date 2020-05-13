@@ -4,7 +4,7 @@ import Header from '../shared/header'
 import Content from './content'
 import Total from './total'
 
-import service from './course.service'
+import service from '../services/course.service'
 
 const Course = () => {
   const [ courses, setCourses] = useState([])

@@ -1,36 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Header from '../shared/header'
 import Display from './display'
 import Button from '../shared/button'
-
-import anecdotes from '../../mock/anecdotes'
+import service from '../services/anecdotes.service'
 
 const Anecdotes = () => {
-  const [ selected, setSelected ] = useState(0)
-  const [ allVotes, setVotes ] = useState(new Uint8Array(anecdotes.length))
+  const [ index, setIndex ] = useState(0)
+  const [ allAnecdotes, setAnecdotes ] = useState([])
+  const [ anecdoteToShow, setAnecdoteToShow ] = useState({})
+  const [ mostVotes, setMostVotes ] = useState({})
 
-  const nextAnecdote = () => setSelected(Math.floor(Math.random() * anecdotes.length))
+  useEffect(() => {
+    service.getAll()
+      .then(response => {
+        setAnecdotes(response)
+        setAnecdoteToShow(response[0])
+        setMostVotes(findMostVotes(response))
+      })
+  }, [])
+
+  const nextAnecdote = () => {
+    setIndex(Math.floor(Math.random() * allAnecdotes.length))
+    setAnecdoteToShow(allAnecdotes[index])
+  }
+
   const voteAnecdote = () => {
-    allVotes[selected] += 1
-    setVotes([ ...allVotes ])
+    let updatedOne = anecdoteToShow
+    updatedOne.votes += 1
+    setAnecdoteToShow(updatedOne)
+    let updateAll = [...allAnecdotes]
+    updateAll[index] = updatedOne
+    setAnecdotes(updateAll)
+    setMostVotes(findMostVotes(allAnecdotes))
+    service.update(anecdoteToShow.id, updatedOne)
   }
-  const compareNumeric = (a, b) => {
-    if (a > b) return 1;
-    if (a === b) return 0;
-    if (a < b) return -1;
+  
+  const findMostVotes = (sortArr) => {
+    const sortAnecdotes = sortArr.sort((a, b) => a.votes - b.votes);
+    return sortAnecdotes[sortArr.length - 1]
   }
-  const mostValue = [...allVotes].sort(compareNumeric)[anecdotes.length - 1];
-  const mostVotes = allVotes.indexOf(mostValue)
 
   return (
     <>
       <Header name='Anecdotes of the day' />
-      <Display text={anecdotes[selected]} number={allVotes[selected]} />
+      <Display anecdote={anecdoteToShow} />
       <Button handleClick={voteAnecdote} text='vote' />
       <Button handleClick={nextAnecdote} text='next anecdote' />
       <Header name='Anecdotes with most votes' />
-      <Display text={anecdotes[mostVotes]} number={allVotes[mostVotes]} />
+      <Display anecdote={mostVotes} />
     </>
   )
 }

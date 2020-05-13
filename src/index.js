@@ -4,8 +4,8 @@ import './index.css'
 
 // import Course from './components/course/index'
 // import Feedback from './components/feedback/index'
-// import Anecdotes from './components/anecdotes/index'
-import PhoneBook from './components/phone-book/index'
+import Anecdotes from './components/anecdotes/index'
+// import PhoneBook from './components/phone-book/index'
 // import Countries from './components/countries/index'
 
 const App = () => {
@@ -13,8 +13,8 @@ const App = () => {
     <>
       {/* <Course /> */}
       {/* <Feedback /> */}
-      {/* <Anecdotes /> */}
-      <PhoneBook />
+      <Anecdotes />
+      {/* <PhoneBook /> */}
       {/* <Countries /> */}
     </>
   )
