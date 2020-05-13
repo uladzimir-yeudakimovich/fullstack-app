@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './filter'
 import PersonForm from './person-form'
 import Persons from './persons'
-import service from '../services/persons.service'
+import service from '../shared/service'
 import Notification from '../shared/notification'
 
 const PhoneBook = () => {
@@ -14,7 +14,7 @@ const PhoneBook = () => {
   const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
-    service.getAll()
+    service.getAll('persons')
       .then(response => {
         setPersons(response)
         setPersonsToShow(response)
@@ -43,7 +43,7 @@ const PhoneBook = () => {
     if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
       const { id, name } = user
       service
-        .update(id, data).then(response => {
+        .update('persons', id, data).then(response => {
           setPersons(persons.map(el => el.id !== id ? el : response))
           setPersonsToShow(personsToShow.map(el => el.id !== id ? el : response))
         })
@@ -59,7 +59,7 @@ const PhoneBook = () => {
   }
 
   const createPersone = user => {
-    service.create(user).then(() => {
+    service.create('persons', user).then(() => {
       setPersons(persons.concat(user))
       setPersonsToShow(personsToShow.concat(user))
       setErrorMessage({ success: `Added ${user.name}` })
@@ -74,7 +74,7 @@ const PhoneBook = () => {
   const deletePerson = id => {
     const person = persons.find(el => el.id === id)
     if (window.confirm(`Delete ${person.name}?`)) {
-      service.remove(id)
+      service.remove('persons', id)
       setPersons(persons.filter(el => el.id !== id))
       setPersonsToShow(personsToShow.filter(el => el.id !== id))
     }

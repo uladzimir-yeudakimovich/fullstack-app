@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../shared/header'
 import Display from './display'
 import Button from '../shared/button'
-import service from '../services/anecdotes.service'
+import service from '../shared/service'
 
 const Anecdotes = () => {
   const [ index, setIndex ] = useState(0)
@@ -12,7 +12,7 @@ const Anecdotes = () => {
   const [ mostVotes, setMostVotes ] = useState({})
 
   useEffect(() => {
-    service.getAll()
+    service.getAll('anecdotes')
       .then(response => {
         setAnecdotes(response)
         setAnecdoteToShow(response[0])
@@ -33,7 +33,7 @@ const Anecdotes = () => {
     updateAll[index] = updatedOne
     setAnecdotes(updateAll)
     setMostVotes(findMostVotes(allAnecdotes))
-    service.update(anecdoteToShow.id, updatedOne)
+    service.update('anecdotes', anecdoteToShow.id, updatedOne)
   }
   
   const findMostVotes = (sortArr) => {
