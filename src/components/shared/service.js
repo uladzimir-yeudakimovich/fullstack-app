@@ -1,4 +1,5 @@
 import axios from 'axios'
+// const baseUrl = 'http://localhost:4000/api/'
 const baseUrl = 'https://uladzimir-yeudakimovich.herokuapp.com/api/'
 
 const getAll = (api) => {
