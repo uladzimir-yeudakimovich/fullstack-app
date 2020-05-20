@@ -51,7 +51,7 @@ const PhoneBook = () => {
           if (error.message.includes('status code 400')) {
             setErrorMessage(`Number is requared for user ${name}, enter and try again.`)
           } else {
-            setErrorMessage(`${error.message}`)
+            setErrorMessage(error.message)
           }
           setTimeout(() => setErrorMessage(null), 5000)
         })
@@ -66,7 +66,7 @@ const PhoneBook = () => {
       setTimeout(() => setErrorMessage(null), 5000)
     })
     .catch(error => {
-      setErrorMessage(`${error.message}`)
+      setErrorMessage(error.message)
       setTimeout(() => setErrorMessage(null), 5000)
     })
   }
