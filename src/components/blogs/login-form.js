@@ -2,7 +2,7 @@ import React from 'react'
 
 import Button from '../shared/button'
 
-const BlogForm = ({ login, setLogin, password, setPassword, submit }) => {
+const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
   return (
     <form>
       <div>
@@ -26,4 +26,4 @@ const BlogForm = ({ login, setLogin, password, setPassword, submit }) => {
   )
 }
 
-export default BlogForm
+export default LoginForm
