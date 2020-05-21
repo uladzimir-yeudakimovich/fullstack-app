@@ -2,26 +2,26 @@ import React from 'react'
 
 import Button from '../shared/button'
 
-const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
+const LoginForm = (props) => {
   return (
     <form>
       <div>
         login <input
           type="text"
-          value={login}
+          value={props.login}
           name="login"
-          onChange={({ target }) => setLogin(target.value)}
+          onChange={({ target }) => props.setLogin(target.value)}
         />
       </div>
       <div>
         password <input
           type="password"
-          value={password}
+          value={props.password}
           name="Password"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={({ target }) => props.setPassword(target.value)}
         />
       </div>
-      <Button handleClick={submit} text="sign in" />
+      <Button handleClick={props.submit} text="submit" />
     </form>
   )
 }

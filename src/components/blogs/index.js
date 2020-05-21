@@ -7,11 +7,13 @@ import BlogsList from './blogs-list'
 import CreateForm from './create-form'
 import Notification from '../shared/notification'
 import Button from '../shared/button'
+import Togglable from './togglable'
 
 const Blogs = () => {
   const [ blogs, setBlogs ] = useState([])
   const [ errorMessage, setErrorMessage ] = useState(null)
   const [ user, setUser ] = useState(null)
+  const [ loginVisible, setLoginVisible ] = useState(false)
   const [ login, setLogin ] = useState('') 
   const [ password, setPassword ] = useState('')
   const [ title, setTitle ] = useState('') 
@@ -20,11 +22,16 @@ const Blogs = () => {
 
   useEffect(() => {
     const _at = window.localStorage.getItem('_at')
-    if (_at) { service.setToken(JSON.parse(_at)) }
+    if (_at) {
+      service.setToken(JSON.parse(_at))
+      getBlogs()
+    }
     const userLogin = window.localStorage.getItem('userLogin')
     if (userLogin) { setUser(JSON.parse(userLogin)) }
-    getBlogs()
   }, [])
+
+  const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+  const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -48,35 +55,40 @@ const Blogs = () => {
     setUser(null)
   }
 
-  const getBlogs = async () => {
-    service.getAll('blogs').then(initialBlogs => setBlogs(initialBlogs))
-  }
+  const getBlogs = async () => await service.getAll('blogs').then(data => setBlogs(data))
 
   const createBlog = async (event) => {
     event.preventDefault()
+    blogFormRef.current.toggleVisibility()
     try {
-      const newBlog = await service.create('blogs', { title, author, url })
+      await service.create('blogs', { title, author, url })
       setTitle('')
       setAuthor('')
       setUrl('')
+      setErrorMessage({ success: `a new blog ${title} ${author} added` })
+      setTimeout(() => setErrorMessage(null), 5000)
     } catch (error) {
       setErrorMessage(error.message)
       setTimeout(() => setErrorMessage(null), 5000)
     }
   }
 
+  const blogFormRef = React.createRef()
+
   if (user === null) {
     return (
       <>
         <Header name='log in to application' />
         <Notification message={errorMessage} />
-        <LoginForm
-          submit={handleLogin}
-          login={login}
-          setLogin={setLogin}
-          password={password}
-          setPassword={setPassword}
-        />
+        <Togglable buttonLabel='login'>
+          <LoginForm
+            submit={handleLogin}
+            login={login}
+            setLogin={setLogin}
+            password={password}
+            setPassword={setPassword}
+          />
+        </Togglable>
       </>
     )
   }
@@ -87,15 +99,17 @@ const Blogs = () => {
       <Button handleClick={handleLogout} text="log out" />
       <Header name='create new' />
       <Notification message={errorMessage} />
-      <CreateForm
-        createBlog={createBlog}
-        title={title}
-        setTitle={setTitle}
-        author={author}
-        setAuthor={setAuthor}
-        url={url}
-        setUrl={setUrl}
-      />
+      <Togglable buttonLabel='new blog' ref={blogFormRef}>
+        <CreateForm
+          createBlog={createBlog}
+          title={title}
+          setTitle={setTitle}
+          author={author}
+          setAuthor={setAuthor}
+          url={url}
+          setUrl={setUrl}
+        />
+      </Togglable>
       <BlogsList blogs={blogs} />
     </>
   )
