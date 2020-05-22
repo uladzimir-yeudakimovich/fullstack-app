@@ -1,10 +1,12 @@
 import React from 'react'
 
+import Header from '../shared/header'
 import Button from '../shared/button'
 
 const CreateForm = ({ title, setTitle, author, setAuthor, url, setUrl, createBlog }) => {
   return (
     <form>
+      <Header name='create new' />
       <div>
         title <input
           type="text"

@@ -2,7 +2,7 @@ import React, { useState, useImperativeHandle } from 'react'
 
 import Button from '../shared/button'
 
-const Togglable = React.forwardRef((props, ref) => {
+const ShowForm = React.forwardRef((props, ref) => {
   const [ visible, setVisible ] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -16,8 +16,12 @@ const Togglable = React.forwardRef((props, ref) => {
     }
   })
 
+  const showFormStyle = {
+    marginTop: '20px'
+  }
+
   return (
-    <>
+    <div style={showFormStyle}>
       <div style={hideWhenVisible}>
         <Button handleClick={toggleVisibility} text={props.buttonLabel} />
       </div>
@@ -25,8 +29,8 @@ const Togglable = React.forwardRef((props, ref) => {
         {props.children}
         <Button handleClick={toggleVisibility} text="cancel" />
       </div>
-    </>
+    </div>
   )
 })
 
-export default Togglable
+export default ShowForm

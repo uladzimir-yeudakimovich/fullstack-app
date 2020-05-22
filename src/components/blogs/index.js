@@ -7,13 +7,12 @@ import BlogsList from './blogs-list'
 import CreateForm from './create-form'
 import Notification from '../shared/notification'
 import Button from '../shared/button'
-import Togglable from './togglable'
+import ShowForm from './show-form'
 
 const Blogs = () => {
   const [ blogs, setBlogs ] = useState([])
   const [ errorMessage, setErrorMessage ] = useState(null)
   const [ user, setUser ] = useState(null)
-  const [ loginVisible, setLoginVisible ] = useState(false)
   const [ login, setLogin ] = useState('') 
   const [ password, setPassword ] = useState('')
   const [ title, setTitle ] = useState('') 
@@ -29,9 +28,6 @@ const Blogs = () => {
     const userLogin = window.localStorage.getItem('userLogin')
     if (userLogin) { setUser(JSON.parse(userLogin)) }
   }, [])
-
-  const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-  const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -80,7 +76,7 @@ const Blogs = () => {
       <>
         <Header name='log in to application' />
         <Notification message={errorMessage} />
-        <Togglable buttonLabel='login'>
+        <ShowForm buttonLabel='login'>
           <LoginForm
             submit={handleLogin}
             login={login}
@@ -88,7 +84,7 @@ const Blogs = () => {
             password={password}
             setPassword={setPassword}
           />
-        </Togglable>
+        </ShowForm>
       </>
     )
   }
@@ -97,9 +93,8 @@ const Blogs = () => {
       <Header name='Blogs' />
       <span>{user} logged in</span>
       <Button handleClick={handleLogout} text="log out" />
-      <Header name='create new' />
       <Notification message={errorMessage} />
-      <Togglable buttonLabel='new blog' ref={blogFormRef}>
+      <ShowForm buttonLabel='create new blog' ref={blogFormRef}>
         <CreateForm
           createBlog={createBlog}
           title={title}
@@ -109,7 +104,7 @@ const Blogs = () => {
           url={url}
           setUrl={setUrl}
         />
-      </Togglable>
+      </ShowForm>
       <BlogsList blogs={blogs} />
     </>
   )
