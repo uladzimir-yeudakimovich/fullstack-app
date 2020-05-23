@@ -80,6 +80,13 @@ const Blogs = () => {
     await service.update('blogs', blog.id, blog)
   }
 
+  const deleteBlog = async blog => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      service.remove('blogs', blog.id)
+      setBlogs(blogs.filter(el => el.id !== blog.id))
+    }
+  }
+
   if (user === null) {
     return (
       <>
@@ -114,7 +121,7 @@ const Blogs = () => {
           setUrl={setUrl}
         />
       </ShowForm>
-      <BlogsList blogs={blogs} addLike={addLike} />
+      <BlogsList blogs={blogs} addLike={addLike} deleteBlog={deleteBlog} />
     </>
   )
 }

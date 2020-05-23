@@ -3,13 +3,17 @@ import React from 'react'
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
 
-const BlogsList = ({ blogs, addLike }) => {
+const BlogsList = ({ blogs, addLike, deleteBlog }) => {
   const blogStyle = {
     border: '2px solid',
     borderRadius: '4px',
     margin: '3px 0',
     padding: '3px'
   }
+
+  const userLogin = JSON.parse(window.localStorage.getItem('userLogin'))
+  const showButton = { display: ''  }
+  const hideButton = { display: 'none' }
 
   return (
     <div>
@@ -23,6 +27,11 @@ const BlogsList = ({ blogs, addLike }) => {
               <Button handleClick={() => addLike(blog)} text="like" />
             </div>
             <div>{blog.user.name}</div>
+            <Button
+              style={userLogin === blog.user.login ? showButton : hideButton}
+              handleClick={() => deleteBlog(blog)}
+              text="remove"
+            />
           </ShowBlogInfo>
         </div>
       )}
