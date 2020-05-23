@@ -51,7 +51,9 @@ const Blogs = () => {
     setUser(null)
   }
 
-  const getBlogs = async () => await service.getAll('blogs').then(data => setBlogs(data))
+  const getBlogs = async () => await service.getAll('blogs').then(data => setBlogs(sort(data)))
+
+  const sort = (sortArr) => sortArr.sort((a, b) => a.likes - b.likes).reverse();
 
   const createBlog = async (event) => {
     event.preventDefault()
@@ -74,7 +76,7 @@ const Blogs = () => {
 
   const addLike = async blog => {
     blog.likes += 1
-    setBlogs(blogs.map(el => el.id !== blog.id ? el : blog))
+    setBlogs(sort(blogs.map(el => el.id !== blog.id ? el : blog)))
     await service.update('blogs', blog.id, blog)
   }
 
