@@ -57,7 +57,8 @@ const Blogs = () => {
     event.preventDefault()
     blogFormRef.current.toggleVisibility()
     try {
-      await service.create('blogs', { title, author, url })
+      const newBlog = await service.create('blogs', { title, author, url })
+      setBlogs(blogs.concat(newBlog))
       setTitle('')
       setAuthor('')
       setUrl('')
@@ -70,6 +71,12 @@ const Blogs = () => {
   }
 
   const blogFormRef = React.createRef()
+
+  const addLike = async blog => {
+    blog.likes += 1
+    setBlogs(blogs.map(el => el.id !== blog.id ? el : blog))
+    await service.update('blogs', blog.id, blog)
+  }
 
   if (user === null) {
     return (
@@ -105,7 +112,7 @@ const Blogs = () => {
           setUrl={setUrl}
         />
       </ShowForm>
-      <BlogsList blogs={blogs} />
+      <BlogsList blogs={blogs} addLike={addLike} />
     </>
   )
 }

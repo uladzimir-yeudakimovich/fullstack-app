@@ -3,7 +3,7 @@ import React from 'react'
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
 
-const BlogsList = ({ blogs }) => {
+const BlogsList = ({ blogs, addLike }) => {
   const blogStyle = {
     border: '2px solid',
     borderRadius: '4px',
@@ -20,7 +20,7 @@ const BlogsList = ({ blogs }) => {
             <div>{blog.url}</div>
             <div>
               {blog.likes}
-              <Button handleClick={() => console.log(event)} text="like" />
+              <Button handleClick={() => addLike(blog)} text="like" />
             </div>
             <div>{blog.user.name}</div>
           </ShowBlogInfo>
