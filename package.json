@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "npm": "^6.14.5",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
@@ -17,7 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch src/mock/persons.json"
+    "server": "json-server -p3001 --watch src/mock/persons.json",
+    "eslint": "eslint ."
   },
   "author": "Uladzimir Yeudakimovich",
   "license": "MIT",
@@ -37,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-jest": "^23.13.1",
     "json-server": "^0.16.1"
   }
 }

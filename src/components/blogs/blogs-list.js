@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
@@ -37,6 +38,12 @@ const BlogsList = ({ blogs, addLike, deleteBlog }) => {
       )}
     </div>
   )
+}
+
+BlogsList.propTypes = {
+  addLike: PropTypes.func.isRequired,
+  deleteBlog: PropTypes.func.isRequired,
+  blogs: PropTypes.array.isRequired
 }
 
 export default BlogsList

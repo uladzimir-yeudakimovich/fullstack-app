@@ -1,4 +1,5 @@
 import React, { useState, useImperativeHandle } from 'react'
+import PropTypes from 'prop-types'
 
 import Button from '../shared/button'
 
@@ -26,5 +27,9 @@ const ShowBlogInfo = React.forwardRef((props, ref) => {
     </>
   )
 })
+
+ShowBlogInfo.propTypes = {
+  buttonLabel: PropTypes.string.isRequired
+}
 
 export default ShowBlogInfo

@@ -1,29 +1,38 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Button from '../shared/button'
 
-const LoginForm = (props) => {
+const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
   return (
     <form>
       <div>
         login <input
           type="text"
-          value={props.login}
+          value={login}
           name="login"
-          onChange={({ target }) => props.setLogin(target.value)}
+          onChange={({ target }) => setLogin(target.value)}
         />
       </div>
       <div>
         password <input
           type="password"
-          value={props.password}
+          value={password}
           name="Password"
-          onChange={({ target }) => props.setPassword(target.value)}
+          onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <Button handleClick={props.submit} text="submit" />
+      <Button handleClick={submit} text="submit" />
     </form>
   )
+}
+
+LoginForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+  setLogin: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  login: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 }
 
 export default LoginForm

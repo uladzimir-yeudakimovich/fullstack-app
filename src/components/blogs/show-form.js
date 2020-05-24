@@ -1,4 +1,5 @@
 import React, { useState, useImperativeHandle } from 'react'
+import PropTypes from 'prop-types'
 
 import Button from '../shared/button'
 
@@ -32,5 +33,9 @@ const ShowForm = React.forwardRef((props, ref) => {
     </div>
   )
 })
+
+ShowForm.propTypes = {
+  buttonLabel: PropTypes.string.isRequired
+}
 
 export default ShowForm
