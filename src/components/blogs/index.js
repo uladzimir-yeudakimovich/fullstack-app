@@ -13,9 +13,9 @@ const Blogs = () => {
   const [ blogs, setBlogs ] = useState([])
   const [ errorMessage, setErrorMessage ] = useState(null)
   const [ user, setUser ] = useState(null)
-  const [ login, setLogin ] = useState('') 
+  const [ login, setLogin ] = useState('')
   const [ password, setPassword ] = useState('')
-  const [ title, setTitle ] = useState('') 
+  const [ title, setTitle ] = useState('')
   const [ author, setAuthor ] = useState('')
   const [ url, setUrl ] = useState('')
 
@@ -53,7 +53,7 @@ const Blogs = () => {
 
   const getBlogs = async () => await service.getAll('blogs').then(data => setBlogs(sort(data)))
 
-  const sort = (sortArr) => sortArr.sort((a, b) => a.likes - b.likes).reverse();
+  const sort = (sortArr) => sortArr.sort((a, b) => a.likes - b.likes).reverse()
 
   const createBlog = async (event) => {
     event.preventDefault()

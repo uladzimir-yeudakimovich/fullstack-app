@@ -35,9 +35,9 @@ const Anecdotes = () => {
     setMostVotes(findMostVotes(allAnecdotes))
     service.update('anecdotes', anecdoteToShow.id, updatedOne)
   }
-  
+
   const findMostVotes = (sortArr) => {
-    const sortAnecdotes = sortArr.sort((a, b) => a.votes - b.votes);
+    const sortAnecdotes = sortArr.sort((a, b) => a.votes - b.votes)
     return sortAnecdotes[sortArr.length - 1]
   }
 

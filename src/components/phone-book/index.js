@@ -33,7 +33,7 @@ const PhoneBook = () => {
       name: newName,
       number: newPhone
     }
-    const findPerson = persons.find(person => person.name === newName);
+    const findPerson = persons.find(person => person.name === newName)
     findPerson ? updataPersone(findPerson, newPerson) : createPersone(newPerson)
     setNewName('')
     setNewPhone('')
@@ -65,10 +65,10 @@ const PhoneBook = () => {
       setErrorMessage({ success: `Added ${user.name}` })
       setTimeout(() => setErrorMessage(null), 5000)
     })
-    .catch(error => {
-      setErrorMessage(error.message)
-      setTimeout(() => setErrorMessage(null), 5000)
-    })
+      .catch(error => {
+        setErrorMessage(error.message)
+        setTimeout(() => setErrorMessage(null), 5000)
+      })
   }
 
   const deletePerson = id => {

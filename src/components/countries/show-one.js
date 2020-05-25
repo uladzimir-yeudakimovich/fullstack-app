@@ -30,11 +30,11 @@ const ShowOne = ({ index, countries }) => {
       </div>
       <h2>languages</h2>
       <ul>
-        {countries[index].languages.map((language, i) => 
+        {countries[index].languages.map((language, i) =>
           <li key={i}>{language.name}</li>
         )}
       </ul>
-      <img style={{height:'70px'}} src={countries[index].flag} alt='flag' />
+      <img style={{ height:'70px' }} src={countries[index].flag} alt='flag' />
       <h2>Weather in {countries[index].capital}</h2>
       <Weather weather={weather} errorMessage={errorMessage} />
     </>

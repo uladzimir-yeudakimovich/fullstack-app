@@ -38,4 +38,6 @@ ShowForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 }
 
+ShowForm.displayName = 'ShowForm'
+
 export default ShowForm

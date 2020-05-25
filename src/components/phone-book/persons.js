@@ -6,10 +6,10 @@ const Persons = ({ persons, deletePerson }) => {
   const btn = {
     margin: '5px 10px'
   }
-  
+
   return (
     <ul>
-      {persons.map((person, i) => 
+      {persons.map((person, i) =>
         <li key={i}>
           {person.name} {person.number}
           <Button

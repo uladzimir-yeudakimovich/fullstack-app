@@ -7,7 +7,7 @@ const ShowMany = ({ showInfo, countries, showCountry, index }) => {
   if (!showInfo) {
     return (
       <>
-        {countries.map((country, i) => 
+        {countries.map((country, i) =>
           <p key={i}>
             {country.name}
             <Button handleClick={() => showCountry(i)} text="show" />

@@ -14,7 +14,7 @@ const Notification = ({ message }) => {
     padding: '10px',
     marginBtom: '10px'
   }
-  const success = {...error, color: 'green'}
+  const success = { ...error, color: 'green' }
 
   if (message.success) {
     return (

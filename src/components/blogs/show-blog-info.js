@@ -32,4 +32,6 @@ ShowBlogInfo.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 }
 
+ShowBlogInfo.displayName = 'ShowBlogInfo'
+
 export default ShowBlogInfo

@@ -8,7 +8,7 @@ const Weather = ({ weather, errorMessage }) => {
     return (
       <>
         <p><strong>temperature:</strong> {weather.temperature} Celcius</p>
-        <img style={{height:'40px'}} src={weather.weather_icons} alt='weather' />
+        <img style={{ height:'40px' }} src={weather.weather_icons} alt='weather' />
         <p><strong>wind:</strong> {weather.wind_speed} mph direction {weather.wind_dir}</p>
       </>
     )
