@@ -5,7 +5,7 @@ import Button from '../shared/button'
 
 const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
   return (
-    <form>
+    <form onSubmit={submit}>
       <div>
         login <input
           type="text"
@@ -18,11 +18,11 @@ const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
         password <input
           type="password"
           value={password}
-          name="Password"
+          name="password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <Button handleClick={submit} text="submit" />
+      <Button type="submit" text="submit" />
     </form>
   )
 }

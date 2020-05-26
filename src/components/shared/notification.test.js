@@ -18,9 +18,10 @@ describe('shared/notification', () => {
     const errorMessage = 'Some error'
     const errorComponent = await render(<Notification message={errorMessage} />)
     const errorElement = errorComponent.getByText('Some error')
-    const div = errorComponent.container.querySelector('div')   
+    const div = errorComponent.container.querySelector('div')
 
     expect(errorElement).toBeDefined()
     expect(div).toHaveStyle('color: red')
+    expect(div).not.toHaveStyle('color: green')
   })
 })

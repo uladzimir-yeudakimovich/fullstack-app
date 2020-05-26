@@ -11,11 +11,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Launches the test runner in the interactive watch mode.
 
+### `npm test -- --coverage`
+
+See test coverage
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.
 
 ### `npm run server`
 
-Runs the server.<br />
-Open [http://localhost:3001/notes](http://localhost:3001/notes) to view it in the browser.
+Runs the server.

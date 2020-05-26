@@ -5,7 +5,7 @@ import Button from '../shared/button'
 
 const CreateForm = ({ title, setTitle, author, setAuthor, url, setUrl, createBlog }) => {
   return (
-    <form>
+    <form onSubmit={createBlog}>
       <Header name='create new' />
       <div>
         title <input
@@ -31,7 +31,7 @@ const CreateForm = ({ title, setTitle, author, setAuthor, url, setUrl, createBlo
           onChange={({ target }) => setUrl(target.value)}
         />
       </div>
-      <Button handleClick={createBlog} text="create" />
+      <Button type="submit" text="create" />
     </form>
   )
 }

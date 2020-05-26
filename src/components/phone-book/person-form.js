@@ -4,20 +4,22 @@ import Button from '../shared/button'
 
 const PersonForm = ({ submit, name, changeName, number, changeNumber }) => {
   return (
-    <form>
+    <form onSubmit={submit}>
       <div>
         name: <input
           value={name}
+          name="name"
           onChange={changeName}
         />
       </div>
       <div>
         number: <input
           value={number}
+          name="number"
           onChange={changeNumber}
         />
       </div>
-      <Button handleClick={submit} text="add" />
+      <Button type="submit" text="add" />
     </form>
   )
 }
