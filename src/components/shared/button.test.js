@@ -1,21 +1,22 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
-import { prettyDOM } from '@testing-library/dom'
+// import { prettyDOM } from '@testing-library/dom'
 import Button from './button'
 
-test('renders content', () => {
-  const text = 'submit'
-  const mockHandler = jest.fn()
-  const component = render(<Button onClick={mockHandler} text={text} />)
+describe('shared/button', () => {
+  test('renders content and should call props.onClick when clicked', () => {
+    const text = 'submit'
+    const mockHandler = jest.fn()
+    const component = render(<Button handleClick={mockHandler} text={text} />)
+    const button = component.container.querySelector('button')
+    const element = component.getByText('submit')
 
-  const element = component.getByText('submit')
-  expect(element).toBeDefined()
+    // console.log(prettyDOM(button))
+    expect(element).toBeDefined()
+    expect(button).toHaveTextContent('submit')
 
-  const button = component.container.querySelector('button')
-  console.log(prettyDOM(button))
-  expect(button).toHaveTextContent('submit')
-
-  fireEvent.click(element)
-  // expect(mockHandler.mock.calls).toHaveLength(1)
+    fireEvent.click(button)
+    expect(mockHandler).toHaveBeenCalledTimes(1)
+  })
 })
