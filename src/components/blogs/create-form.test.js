@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import CreateForm from './create-form'
 
-test('<CreateForm /> updates parent state and calls onSubmit', async () => {
+test('<CreateForm /> updates parent state and calls onSubmit', () => {
   const createBlog = jest.fn()
   const setTitle = jest.fn()
   const setAuthor = jest.fn()
@@ -33,7 +33,7 @@ test('<CreateForm /> updates parent state and calls onSubmit', async () => {
   fireEvent.change(inputUrl, {
     target: { value: 'url' }
   })
-  await fireEvent.submit(form)
+  fireEvent.submit(form)
 
   expect(createBlog.mock.calls).toHaveLength(1)
 })
