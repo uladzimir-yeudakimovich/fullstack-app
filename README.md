@@ -22,3 +22,7 @@ Builds the app for production to the `build` folder.
 ### `npm run server`
 
 Runs the server.
+
+### `npm run cypress:open`
+
+Before run front-end and back-end, then run this script

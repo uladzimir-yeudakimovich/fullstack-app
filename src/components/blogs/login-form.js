@@ -8,6 +8,7 @@ const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
     <form onSubmit={submit}>
       <div>
         login <input
+          id='login'
           type="text"
           value={login}
           name="login"
@@ -16,6 +17,7 @@ const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
       </div>
       <div>
         password <input
+          id='password'
           type="password"
           value={password}
           name="password"

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const baseUrl = 'http://localhost:4000/'
-const baseUrl = 'https://uladzimir-yeudakimovich.herokuapp.com/'
+const baseUrl = 'http://localhost:4000/'
+// const baseUrl = 'https://uladzimir-yeudakimovich.herokuapp.com/'
 let token = null
 
 const setToken = newToken => token = `Bearer ${newToken}`
