@@ -1,14 +1,14 @@
-describe('Create blog', function() {
+describe('Blog component', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:4000/api/testing/reset')
   })
 
-  describe('when logged in', function() {
+  describe.only('When logged in', function() {
     beforeEach(function() {
       cy.login({ login: 'admin', password: 'admin' })
     })
 
-    it('a new blog can be created', function() {
+    it('A blog can be created and deleted by the same user', function() {
       cy.contains('create new blog').click()
       cy.get('input[name=\'title\']').type('test_title')
       cy.get('input[name=\'author\']').type('test_author')
@@ -17,16 +17,32 @@ describe('Create blog', function() {
       cy.contains('a new blog test_title test_author added')
         .should('have.css', 'color', 'rgb(0, 128, 0)')
         .should('have.css', 'border-style', 'solid')
+
+      cy.contains('logout').click()
+      cy.login({ login: 'admin2', password: 'admin2' })
+      cy.get('html').should('not.contain', 'admin logged in')
+      cy.contains('admin2 logged in')
+      cy.contains('view').click()
+      cy.contains('remove').should('have.css', 'display', 'none')
+
+      cy.contains('logout').click()
+      cy.login({ login: 'admin', password: 'admin' })
+      cy.get('html').should('not.contain', 'admin2 logged in')
+      cy.contains('admin logged in')
+      cy.contains('view').click()
+      cy.contains('remove').should('have.css', 'display', 'inline-block')
+      cy.contains('remove').click()
+      cy.get('html').should('not.contain', 'test_title test_author')
     })
 
-    describe('and a blog exists', function () {
+    describe('Blogs can be liked', function () {
       beforeEach(function () {
         cy.createBlog({ title: 'first test_title', author: 'test_author', url: 'test_url' })
         cy.createBlog({ title: 'second test_title', author: 'test_author', url: 'test_url' })
         cy.createBlog({ title: 'third test_title', author: 'test_author', url: 'test_url' })
       })
 
-      it('it can be made important', function () {
+      it('Blogs should be like and arranged in the right order', function () {
         cy.contains('first test_title test_author')
         cy.contains('second test_title test_author')
         cy.contains('third test_title test_author')
@@ -52,6 +68,12 @@ describe('Create blog', function() {
         cy.contains('third test_title test_author').parent().contains('1')
         cy.contains('second test_title test_author').parent().contains('2')
         cy.contains('first test_title test_author').parent().contains('3')
+
+        cy.get('span').then(blogs => {
+          cy.wrap(blogs[1]).contains('first test_title test_author')
+          cy.wrap(blogs[2]).contains('second test_title test_author')
+          cy.wrap(blogs[3]).contains('third test_title test_author')
+        })
       })
     })
   })
