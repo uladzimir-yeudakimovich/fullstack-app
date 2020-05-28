@@ -108,7 +108,7 @@ const Blogs = () => {
     <>
       <Header name='Blogs' />
       <span>{user} logged in</span>
-      <Button handleClick={handleLogout} text="log out" />
+      <Button handleClick={handleLogout} text="logout" />
       <Notification message={errorMessage} />
       <ShowForm buttonLabel='create new blog' ref={blogFormRef}>
         <CreateForm

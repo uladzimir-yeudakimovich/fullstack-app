@@ -16,5 +16,7 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
     headers: {
       'Authorization': `Bearer ${JSON.parse(localStorage.getItem('_at'))}`
     }
+  }).then(() => {
+    cy.visit('http://localhost:3000')
   })
 })

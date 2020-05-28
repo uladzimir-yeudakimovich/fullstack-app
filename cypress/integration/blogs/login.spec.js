@@ -34,7 +34,7 @@ describe('Login', function() {
     cy.get('#login').type('admin')
     cy.get('#password').type('admin')
     cy.contains('submit').click()
-
     cy.contains('admin logged in')
+    cy.contains('logout')
   })
 })
