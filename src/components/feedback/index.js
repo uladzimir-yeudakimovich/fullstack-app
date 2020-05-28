@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Header from '../shared/header'
 import Button from '../shared/button'
 import Statistics from './statistics'
+import Counter from './counter'
 
 const Feedback = () => {
   const [good, setGood] = useState(0)
@@ -33,6 +34,8 @@ const Feedback = () => {
       <Button handleClick={increaseBad} text='bad' />
       <Header name='statistics' />
       <Statistics allFeedbacks={allFeedbacks} />
+      <Header name='counter' />
+      <Counter />
     </>
   )
 }
