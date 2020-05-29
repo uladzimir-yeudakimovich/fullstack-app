@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+// import store from '../../redurs/blog-reducer'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
@@ -36,6 +37,15 @@ const BlogsList = ({ blogs, addLike, deleteBlog }) => {
           </ShowBlogInfo>
         </div>
       )}
+      {/* {store.getState().map(blog =>
+        <div key={blog.id} style={blogStyle}>
+          <span>{blog.title} {blog.author}</span>
+          <ShowBlogInfo buttonLabel="view">
+            <div>{blog.url}</div>
+            <div>{blog.user.name}</div>
+          </ShowBlogInfo>
+        </div>
+      )} */}
     </div>
   )
 }

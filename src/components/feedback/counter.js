@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../../store'
+import store from '../../redurs/counter-reducer'
 import Button from '../shared/button'
 
 const Counter = () => {

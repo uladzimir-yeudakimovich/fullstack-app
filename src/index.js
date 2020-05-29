@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import store from './store'
+import store from './redurs/counter-reducer'
 import './index.css'
 
 // import Anecdotes from './components/anecdotes/index'
