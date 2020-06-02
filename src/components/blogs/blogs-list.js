@@ -1,10 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+// import { useSelector, useDispatch } from 'react-redux'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
 
 const BlogsList = ({ blogs, addLike, deleteBlog }) => {
+  // const dispatch = useDispatch()
+  // const blogsFromReducer = useSelector(state => state)
+  // if (!blogsFromReducer.length && blogs.length) {
+  //   dispatch({ type: 'NEW_BLOG', data: blogs })
+  // }
+
   const blogStyle = {
     border: '2px solid',
     borderRadius: '4px',
