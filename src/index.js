@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import './index.css'
 
 // import Anecdotes from './components/anecdotes/index'
@@ -9,8 +11,9 @@ import './index.css'
 import Feedback from './components/feedback/index'
 // import PhoneBook from './components/phone-book/index'
 
-// import { store } from './reducers/blog-reducer'
-import { store } from './reducers/counter-reducer'
+import counterReducer from './reducers/counter-reducer'
+
+const store = createStore(counterReducer)
 
 const App = () => {
   return (
@@ -25,9 +28,9 @@ const App = () => {
   )
 }
 
-const renderApp = () => {
-  ReactDOM.render(<App />, document.getElementById('root'))
-}
-
-renderApp()
-store.subscribe(renderApp)
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)

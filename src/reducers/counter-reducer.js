@@ -1,10 +1,4 @@
-import { createStore } from 'redux'
-
-const initialState = {
-  good: 0,
-  ok: 0,
-  bad: 0
-}
+const initialState = { good: 0, ok: 0, bad: 0 }
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,6 +24,4 @@ const counterReducer = (state = initialState, action) => {
   }
 }
 
-const store = createStore(counterReducer)
-
-export { store, counterReducer }
+export default counterReducer

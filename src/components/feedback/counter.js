@@ -1,16 +1,19 @@
 import React from 'react'
 import Button from '../shared/button'
-import { store } from '../../reducers/counter-reducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Counter = () => {
+  const dispatch = useDispatch()
+  const count = useSelector(state => state)
+
   return (
     <>
-      <div>good: {store.getState().good}</div>
-      <div>ok: {store.getState().ok}</div>
-      <div>bad: {store.getState().bad}</div>
-      <Button handleClick={() => store.dispatch({ type: 'GOOD' })} text='good' />
-      <Button handleClick={() => store.dispatch({ type: 'OK' })} text='ok' />
-      <Button handleClick={() => store.dispatch({ type: 'BAD' })} text='bad' />
+      <div>good: {count.good}</div>
+      <div>ok: {count.ok}</div>
+      <div>bad: {count.bad}</div>
+      <Button handleClick={() => dispatch({ type: 'GOOD' })} text='good' />
+      <Button handleClick={() => dispatch({ type: 'OK' })} text='ok' />
+      <Button handleClick={() => dispatch({ type: 'BAD' })} text='bad' />
     </>
   )
 }
