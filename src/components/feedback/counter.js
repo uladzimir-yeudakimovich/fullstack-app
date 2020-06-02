@@ -1,14 +1,16 @@
 import React from 'react'
-import store from '../../redurs/counter-reducer'
 import Button from '../shared/button'
+import { store } from '../../reducers/counter-reducer'
 
 const Counter = () => {
   return (
     <>
-      <div>{store.getState()}</div>
-      <Button handleClick={() => store.dispatch({ type: 'INCREMENT' })} text='plus' />
-      <Button handleClick={() => store.dispatch({ type: 'DECREMENT' })} text='minus' />
-      <Button handleClick={() => store.dispatch({ type: 'ZERO' })} text='zero' />
+      <div>good: {store.getState().good}</div>
+      <div>ok: {store.getState().ok}</div>
+      <div>bad: {store.getState().bad}</div>
+      <Button handleClick={() => store.dispatch({ type: 'GOOD' })} text='good' />
+      <Button handleClick={() => store.dispatch({ type: 'OK' })} text='ok' />
+      <Button handleClick={() => store.dispatch({ type: 'BAD' })} text='bad' />
     </>
   )
 }

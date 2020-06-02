@@ -38,4 +38,4 @@ store.dispatch({
   }
 })
 
-export default store
+export { store, blogReducer }

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import store from '../../redurs/blog-reducer'
+// import { store } from '../../reducers/blog-reducer'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'

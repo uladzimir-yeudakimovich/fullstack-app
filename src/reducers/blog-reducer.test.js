@@ -1,12 +1,6 @@
 import deepFreeze from 'deep-freeze'
 
-const blogReducer = (state = [], action) => {
-  if (action.type === 'NEW_BLOG') {
-    return state.concat(action.data)
-  }
-
-  return state
-}
+import { blogReducer } from './blog-reducer'
 
 describe('blogReducer', () => {
   test('returns new state with action NEW_BLOG', () => {

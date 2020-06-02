@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import store from './redurs/counter-reducer'
 import './index.css'
 
 // import Anecdotes from './components/anecdotes/index'
@@ -9,6 +8,9 @@ import './index.css'
 // import Course from './components/course/index'
 import Feedback from './components/feedback/index'
 // import PhoneBook from './components/phone-book/index'
+
+// import { store } from './reducers/blog-reducer'
+import { store } from './reducers/counter-reducer'
 
 const App = () => {
   return (
