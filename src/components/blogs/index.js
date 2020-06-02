@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 
 import service from '../shared/service'
 import Header from '../shared/header'
@@ -8,8 +11,13 @@ import CreateForm from './create-form'
 import Notification from '../shared/notification'
 import Button from '../shared/button'
 import ShowForm from './show-form'
+import blogReducer from '../../reducers/blog-reducer'
+
+const store = createStore(blogReducer)
 
 const Blogs = () => {
+  // const dispatch = useDispatch()
+  // const blogsFromReducer = useSelector(state => state)
   const [ blogs, setBlogs ] = useState([])
   const [ errorMessage, setErrorMessage ] = useState(null)
   const [ user, setUser ] = useState(null)
@@ -105,7 +113,7 @@ const Blogs = () => {
     )
   }
   return (
-    <>
+    <Provider store={store}>
       <Header name='Blogs' />
       <span>{user} logged in</span>
       <Button handleClick={handleLogout} text="logout" />
@@ -122,7 +130,7 @@ const Blogs = () => {
         />
       </ShowForm>
       <BlogsList blogs={blogs} addLike={addLike} deleteBlog={deleteBlog} />
-    </>
+    </Provider>
   )
 }
 

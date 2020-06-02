@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import Header from '../shared/header'
 import Button from '../shared/button'
 import Statistics from './statistics'
 import Counter from './counter'
+import counterReducer from '../../reducers/counter-reducer'
+
+const store = createStore(counterReducer)
 
 const Feedback = () => {
   const [good, setGood] = useState(0)
@@ -27,7 +32,7 @@ const Feedback = () => {
   }
 
   return (
-    <>
+    <Provider store={store}>
       <Header name='give feedback' />
       <Button handleClick={increaseGood} text='good' />
       <Button handleClick={increaseNeutral} text='neutral' />
@@ -36,7 +41,7 @@ const Feedback = () => {
       <Statistics allFeedbacks={allFeedbacks} />
       <Header name='counter' />
       <Counter />
-    </>
+    </Provider>
   )
 }
 

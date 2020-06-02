@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze'
 
-import { blogReducer } from './blog-reducer'
+import blogReducer from './blog-reducer'
 
 describe('blogReducer', () => {
   test('returns new state with action NEW_BLOG', () => {
@@ -19,7 +19,6 @@ describe('blogReducer', () => {
 
     deepFreeze(state)
     const newState = blogReducer(state, action)
-
     expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
