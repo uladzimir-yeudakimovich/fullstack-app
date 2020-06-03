@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import Header from '../shared/header'
 import Button from '../shared/button'
 import Statistics from './statistics'
 import Counter from './counter'
 import counterReducer from '../../reducers/counter-reducer'
+import filterReducer from '../../reducers/filter-reducer'
 
-const store = createStore(counterReducer)
+const reducer = combineReducers({
+  counter: counterReducer,
+  filter: filterReducer
+})
+
+const store = createStore(
+  reducer,
+  composeWithDevTools()
+)
 
 const Feedback = () => {
   const [good, setGood] = useState(0)
