@@ -1,7 +1,7 @@
 const blogReducer = (state = [], action) => {
   switch (action.type) {
-  case 'SET_BLOGS': {
-    return state.concat(action.data)
+  case 'INIT_BLOGS': {
+    return action.data
   }
   case 'NEW_BLOG': {
     return [...state, action.data]
@@ -12,17 +12,20 @@ const blogReducer = (state = [], action) => {
   }
   case 'ADD_LIKE': {
     const id = action.data.id
-    const blogToChange = state.find(n => n.id === id)
-    const changedBlog = {
-      ...blogToChange,
-      likes: blogToChange.likes + 1
-    }
+    const changedBlog = action.data
     return state.map(blog =>
       blog.id !== id ? blog : changedBlog
     )
   }
   default:
     return state
+  }
+}
+
+export const initializeBlogs = blogs => {
+  return {
+    type: 'INIT_BLOGS',
+    data: blogs,
   }
 }
 

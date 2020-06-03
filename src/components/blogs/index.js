@@ -11,6 +11,7 @@ import Notification from '../shared/notification'
 import Button from '../shared/button'
 import ShowForm from './show-form'
 import blogReducer from '../../reducers/blog-reducer'
+import { initializeBlogs } from '../../reducers/blog-reducer'
 
 const store = createStore(
   blogReducer,
@@ -59,7 +60,10 @@ const Blogs = () => {
     setUser(null)
   }
 
-  const getBlogs = async () => await service.getAll('blogs').then(data => setBlogs(sort(data)))
+  const getBlogs = async () => await service.getAll('blogs').then(data => {
+    setBlogs(sort(data))
+    store.dispatch(initializeBlogs(data))
+  })
 
   const sort = (sortArr) => sortArr.sort((a, b) => a.likes - b.likes).reverse()
 
@@ -69,6 +73,7 @@ const Blogs = () => {
     try {
       const newBlog = await service.create('blogs', { title, author, url })
       setBlogs(blogs.concat(newBlog))
+      store.dispatch({ type: 'NEW_BLOG', data: { title, author, url, likes: 0 } })
       setTitle('')
       setAuthor('')
       setUrl('')
@@ -85,6 +90,7 @@ const Blogs = () => {
   const addLike = async blog => {
     blog.likes += 1
     setBlogs(sort(blogs.map(el => el.id !== blog.id ? el : blog)))
+    store.dispatch({ type: 'ADD_LIKE', data: blog })
     await service.update('blogs', blog.id, blog)
   }
 
@@ -92,6 +98,7 @@ const Blogs = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
       service.remove('blogs', blog.id)
       setBlogs(blogs.filter(el => el.id !== blog.id))
+      store.dispatch({ type: 'DELETE_BLOG', data: blog })
     }
   }
 
