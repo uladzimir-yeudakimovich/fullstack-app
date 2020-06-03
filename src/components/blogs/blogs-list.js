@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
 
 const BlogsList = ({ blogs, addLike, deleteBlog }) => {
-  // const dispatch = useDispatch()
-  // const blogsFromReducer = useSelector(state => state)
-  // if (!blogsFromReducer.length && blogs.length) {
-  //   dispatch({ type: 'NEW_BLOG', data: blogs })
-  // }
+  const dispatch = useDispatch()
+  const blogsFromReducer = useSelector(state => state)
+
+  if (!blogsFromReducer.length && blogs.length) {
+    dispatch({ type: 'SET_BLOGS', data: blogs })
+  }
 
   const blogStyle = {
     border: '2px solid',
@@ -22,6 +23,11 @@ const BlogsList = ({ blogs, addLike, deleteBlog }) => {
   const userLogin = JSON.parse(window.localStorage.getItem('userLogin'))
   const showButton = { display: ''  }
   const hideButton = { display: 'none' }
+
+  const deleteButton = blog => {
+    deleteBlog(blog)
+    dispatch({ type: 'DELETE_BLOG', data: blog })
+  }
 
   return (
     <div>
@@ -37,7 +43,7 @@ const BlogsList = ({ blogs, addLike, deleteBlog }) => {
             <div>{blog.user.name}</div>
             <Button
               style={userLogin === blog.user.login ? showButton : hideButton}
-              handleClick={() => deleteBlog(blog)}
+              handleClick={() => deleteButton(blog)}
               text="remove"
             />
           </ShowBlogInfo>

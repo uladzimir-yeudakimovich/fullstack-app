@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import service from '../shared/service'
@@ -11,7 +12,10 @@ import Button from '../shared/button'
 import ShowForm from './show-form'
 import blogReducer from '../../reducers/blog-reducer'
 
-const store = createStore(blogReducer)
+const store = createStore(
+  blogReducer,
+  composeWithDevTools()
+)
 
 const Blogs = () => {
   const [ blogs, setBlogs ] = useState([])
