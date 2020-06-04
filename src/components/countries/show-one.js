@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import Weather from './weather'
+import Notification from '../shared/notification'
+import Header from '../shared/header'
 
 const url = 'http://api.weatherstack.com/current'
 const api_key = process.env.REACT_APP_WEATHER_API_KEY
 
-const ShowOne = ({ index, countries }) => {
-  const [ weather, setWeather ] = useState([])
-  const [ errorMessage, setErrorMessage ] = useState('some error happened...')
+const ShowOne = ({ country }) => {
+  const [ weather, setWeather ] = useState()
+  const [ errorMessage, setErrorMessage ] = useState(null)
 
   useEffect(() => {
     axios
-      .get(`${url}?access_key=${api_key}&query=${countries[index].name}`)
+      .get(`${url}?access_key=${api_key}&query=${country.name}`)
       .then(response => {
-        console.log(response.data.error.info)
         if (response.data.error) {
-          return setErrorMessage(response.data.error.info)
+          return setErrorMessage(response.data.error)
         }
         setWeather(response.data.current)
       })
-  })
+  }, [])
 
   return (
     <>
-      <h1>{countries[index].name}</h1>
+      <Header name={country.name} />
       <div>
-        <p>capital {countries[index].capital}</p>
-        <p>population {countries[index].population}</p>
+        <p>capital {country.capital}</p>
+        <p>population {country.population}</p>
       </div>
       <h2>languages</h2>
       <ul>
-        {countries[index].languages.map((language, i) =>
+        {country.languages.map((language, i) =>
           <li key={i}>{language.name}</li>
         )}
       </ul>
-      <img style={{ height:'70px' }} src={countries[index].flag} alt='flag' />
-      <h2>Weather in {countries[index].capital}</h2>
-      <Weather weather={weather} errorMessage={errorMessage} />
+      <img style={{ height:'70px' }} src={country.flag} alt='flag' />
+      <h2>Weather in {country.capital}</h2>
+      <Weather weather={weather} />
+      <Notification message={errorMessage} />
     </>
   )
 }

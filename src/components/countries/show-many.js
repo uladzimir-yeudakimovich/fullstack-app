@@ -22,7 +22,7 @@ const ShowMany = ({ showInfo, countries, showCountry, index }) => {
           {countries[index].name}
           <Button handleClick={showCountry} text="hide" />
         </p>
-        <ShowOne index={index} countries={countries}/>
+        <ShowOne country={countries[index]}/>
       </>
     )
   }
