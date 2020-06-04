@@ -1,5 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
+
 import './index.css'
 
 import Anecdotes from './components/anecdotes/index'
@@ -10,58 +15,49 @@ import Feedback from './components/feedback/index'
 import PhoneBook from './components/phone-book/index'
 
 const App = () => {
-  const [page, setPage] = useState('blogs')
-
-  const toPage = (page) => (event) => {
-    event.preventDefault()
-    setPage(page)
-  }
-
-  const content = () => {
-    if (page === 'anecdotes') {
-      return <Anecdotes />
-    } else if (page === 'blogs') {
-      return <Blogs />
-    } else if (page === 'countries') {
-      return <Countries />
-    } else if (page === 'course') {
-      return <Course />
-    } else if (page === 'feedback') {
-      return <Feedback />
-    } else if (page === 'phoneBook') {
-      return <PhoneBook />
-    }
-  }
-
   const padding = {
     padding: 5
   }
 
   return (
-    <div>
+    <Router>
       <div>
-        <a href="" onClick={toPage('anecdotes')} style={padding}>
-          anecdotes
-        </a>
-        <a href="" onClick={toPage('blogs')} style={padding}>
-          blogs
-        </a>
-        <a href="" onClick={toPage('countries')} style={padding}>
-          countries
-        </a>
-        <a href="" onClick={toPage('course')} style={padding}>
-          course
-        </a>
-        <a href="" onClick={toPage('feedback')} style={padding}>
-          feedback
-        </a>
-        <a href="" onClick={toPage('phoneBook')} style={padding}>
-          phoneBook
-        </a>
+        <Link style={padding} to="/anecdotes">anecdotes</Link>
+        <Link style={padding} to="/blogs">blogs</Link>
+        <Link style={padding} to="/countries">countries</Link>
+        <Link style={padding} to="/course">course</Link>
+        <Link style={padding} to="/feedback">feedback</Link>
+        <Link style={padding} to="/phoneBook">phoneBook</Link>
       </div>
 
-      {content()}
-    </div>
+      <Switch>
+        <Route path="/anecdotes">
+          <Anecdotes />
+        </Route>
+        <Route path="/blogs">
+          <Blogs />
+        </Route>
+        <Route path="/countries">
+          <Countries />
+        </Route>
+        <Route path="/course">
+          <Course />
+        </Route>
+        <Route path="/feedback">
+          <Feedback />
+        </Route>
+        <Route path="/phoneBook">
+          <PhoneBook />
+        </Route>
+        <Route path="/">
+          <Blogs />
+        </Route>
+      </Switch>
+
+      <div>
+        <i>Fullstack-app 2020</i>
+      </div>
+    </Router>
   )
 }
 
