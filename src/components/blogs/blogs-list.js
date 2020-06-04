@@ -1,10 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
+import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
 
-const BlogsList = ({ blogs, addLike, deleteBlog }) => {
+const BlogsList = () => {
+  const dispatch = useDispatch()
+  const blogs = useSelector(state => state)
+
+  useEffect(() => {
+    dispatch(initializeBlogs())
+  }, [dispatch])
+
+  const addLike = async blog => {
+    blog.likes += 1
+    dispatch(addLikeForBlog(blog))
+  }
+
+  const deleteBlog = async blog => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      dispatch(removeBlog(blog))
+    }
+  }
+
   const blogStyle = {
     border: '2px solid',
     borderRadius: '4px',
@@ -38,12 +57,6 @@ const BlogsList = ({ blogs, addLike, deleteBlog }) => {
       )}
     </div>
   )
-}
-
-BlogsList.propTypes = {
-  addLike: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired,
-  blogs: PropTypes.array.isRequired
 }
 
 export default BlogsList
