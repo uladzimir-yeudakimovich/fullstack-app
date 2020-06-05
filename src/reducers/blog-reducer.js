@@ -26,11 +26,16 @@ const blogReducer = (state = [], action) => {
 
 export const initializeBlogs = () => {
   return async dispatch => {
-    const blogs = await service.getAll('blogs')
-    dispatch({
-      type: 'INIT_BLOGS',
-      data: blogs,
-    })
+    try {
+      const blogs = await service.getAll('blogs')
+      dispatch({
+        type: 'INIT_BLOGS',
+        data: blogs,
+      })
+    } catch (error) {
+      console.log(error)
+      window.localStorage.clear()
+    }
   }
 }
 

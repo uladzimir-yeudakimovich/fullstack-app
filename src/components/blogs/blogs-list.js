@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+// import { useRouteMatch } from 'react-router-dom'
 
 import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
@@ -8,6 +9,10 @@ import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog
 const BlogsList = () => {
   const dispatch = useDispatch()
   const blogs = useSelector(state => state)
+  // const match = useRouteMatch('/blogs/:id')
+  // const blog = match
+  //   ? blogs.find(el => el.id === Number(match.params.id))
+  //   : null
 
   useEffect(() => {
     dispatch(initializeBlogs())
