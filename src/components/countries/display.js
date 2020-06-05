@@ -18,7 +18,7 @@ const Display = ({ countries }) => {
     )
   } else if (countries.length === 1) {
     return (
-      <ShowOne index={0} countries={countries}/>
+      <ShowOne country={countries[0]}/>
     )
   } else if (countries.length !== 0) {
     return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Button from '../shared/button'
 import ShowOne from './show-one'
@@ -10,22 +11,24 @@ const ShowMany = ({ showInfo, countries, showCountry, index }) => {
         {countries.map((country, i) =>
           <p key={i}>
             {country.name}
-            <Button handleClick={() => showCountry(i)} text="show" />
+            <Link to={`/countries/${country.numericCode}`}>
+              <Button handleClick={() => showCountry(i)} text="show" />
+            </Link>
           </p>
         )}
       </>
     )
-  } else {
-    return (
-      <>
-        <p>
-          {countries[index].name}
-          <Button handleClick={showCountry} text="hide" />
-        </p>
-        <ShowOne country={countries[index]}/>
-      </>
-    )
   }
+
+  return (
+    <>
+      <p>
+        {countries[index].name}
+        <Button handleClick={showCountry} text="hide" />
+      </p>
+      <ShowOne country={countries[index]}/>
+    </>
+  )
 }
 
 export default ShowMany

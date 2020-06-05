@@ -40,7 +40,7 @@ const BlogsList = () => {
       {blogs.map(blog =>
         <div key={blog.id} style={blogStyle}>
           <span>{blog.title} {blog.author}</span>
-          <ShowBlogInfo buttonLabel="view">
+          <ShowBlogInfo id={blog.id} buttonLabel="view">
             <div>{blog.url}</div>
             <div>
               {blog.likes}

@@ -34,8 +34,14 @@ const App = () => {
         <Route path="/anecdotes">
           <Anecdotes />
         </Route>
+        <Route path="/blogs/:id">
+          <Blogs />
+        </Route>
         <Route path="/blogs">
           <Blogs />
+        </Route>
+        <Route path="/countries/:id">
+          <Countries />
         </Route>
         <Route path="/countries">
           <Countries />
