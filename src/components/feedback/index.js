@@ -9,6 +9,7 @@ import Statistics from './statistics'
 import Counter from './counter'
 import counterReducer from '../../reducers/counter-reducer'
 import filterReducer from '../../reducers/filter-reducer'
+import NewCounter from './new-counter'
 
 const reducer = combineReducers({
   counter: counterReducer,
@@ -43,14 +44,16 @@ const Feedback = () => {
 
   return (
     <Provider store={store}>
-      <Header name='give feedback' />
+      <Header name='Give feedback' />
       <Button handleClick={increaseGood} text='good' />
       <Button handleClick={increaseNeutral} text='neutral' />
       <Button handleClick={increaseBad} text='bad' />
-      <Header name='statistics' />
+      <Header name='Statistics' />
       <Statistics allFeedbacks={allFeedbacks} />
-      <Header name='counter' />
+      <Header name='Counter' />
       <Counter />
+      <Header name='New counter' />
+      <NewCounter />
     </Provider>
   )
 }
