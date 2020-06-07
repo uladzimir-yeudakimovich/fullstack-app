@@ -7,7 +7,8 @@ module.exports = {
   },
   "extends": [ 
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -17,7 +18,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest", "cypress"
+    "react", "jest", "cypress", "react-hooks"
   ],
   "rules": {
     "indent": [
@@ -38,6 +39,8 @@ module.exports = {
     ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "object-curly-spacing": [
       "error", "always"
     ],
