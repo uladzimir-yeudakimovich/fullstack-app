@@ -1,11 +1,16 @@
 import { useState } from 'react'
 
 export const useField = (name, type) => {
-  const id = name
   const [value, setValue] = useState('')
+  const id = name
   const onChange = (event) => setValue(event.target.value)
+  const reset = () => setValue('')
 
-  return { id, type, value, name, onChange }
+  return {
+    value,
+    bind: {id, type, value, name, onChange},
+    reset
+  }
 }
 
 export const useCounter = () => {

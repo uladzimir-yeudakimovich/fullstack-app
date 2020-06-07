@@ -10,13 +10,11 @@ import { useField } from '../../hooks/index'
 const Login = ({ onLogin }) => {
   const [ errorMessage, setErrorMessage ] = useState(null)
   const history = useHistory()
-  const userLogin = useField('login', 'text')
-  const userPassword = useField('password', 'password')
+  const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
+  const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    const login = userLogin.value
-    const password = userPassword.value
     try {
       const user = await service.getToken('login', { login, password })
       window.localStorage.setItem('_at', JSON.stringify(user.token))
@@ -28,22 +26,24 @@ const Login = ({ onLogin }) => {
       setErrorMessage(error.message)
       setTimeout(() => setErrorMessage(null), 5000)
     }
+    loginReset()
+    passwordReset()
   }
 
   return (
-    <div>
+    <>
       <Header name='login' />
       <Notification message={errorMessage} />
       <form onSubmit={onSubmit}>
         <div>
-          login <input {...userLogin} />
+          login <input {...bindLogin} />
         </div>
         <div>
-          password <input {...userPassword} />
+          password <input {...bindPassword} />
         </div>
         <Button type="submit" text="submit" />
       </form>
-    </div>
+    </>
   )
 }
 
