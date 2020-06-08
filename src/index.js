@@ -39,7 +39,7 @@ const App = () => {
   const padding = { padding: 5 }
 
   return (
-    <>
+    <div className="container">
       <div>
         <Link style={padding} to="/anecdotes">anecdotes</Link>
         <Link style={padding} to="/blogs">blogs</Link>
@@ -92,7 +92,7 @@ const App = () => {
       <div>
         <i>Fullstack-app 2020</i>
       </div>
-    </>
+    </div>
   )
 }
 

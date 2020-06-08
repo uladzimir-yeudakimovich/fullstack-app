@@ -1,12 +1,18 @@
 import React from 'react'
+import { Table } from 'react-bootstrap'
 
 const Content = ({ parts }) => {
   return (
-    <>
-      {parts.map((value, index) => (
-        <p key={index}>{value.name + ' ' + value.exercises}</p>
-      ))}
-    </>
+    <Table striped>
+      <tbody>
+        {parts.map((part, index) => (
+          <tr key={index}>
+            <td>{part.name}</td>
+            <td>{part.exercises}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   )
 }
 
