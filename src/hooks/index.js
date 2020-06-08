@@ -38,3 +38,35 @@ export const useCountry = source => {
 
   return { value, valueToShow, filter: {onChange} }
 }
+
+export const useResource = baseUrl => {
+  const [resources, setResources] = useState([])
+
+  useEffect(() => {
+    axios.get(baseUrl).then(response => {
+      setResources(response.data)
+    })
+  }, [])
+
+  const create = resource => {
+    axios.post(baseUrl, resource).then(response => {
+      setResources(resources.concat(response))
+    })
+  }
+
+  const update = (id, resource) => {
+    axios.post(`${baseUrl}/${id}`, resource).then(response => {
+      setResources(resources.map(el => el.id !== id ? el : response))
+    })
+  }
+
+  const remove = id => {
+    axios.delete(`${baseUrl}/${id}`).then(() => {
+      setResources(resources.filter(el => el.id !== id))
+    })
+  }
+
+  const service = { create, update, remove }
+
+  return [resources, service]
+}
