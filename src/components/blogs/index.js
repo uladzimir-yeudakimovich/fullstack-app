@@ -10,7 +10,7 @@ const Blogs = () => {
   return (
     <Provider store={store}>
       <Header name='Blogs' />
-      <CreateForm/>
+      <CreateForm />
       <BlogsList />
     </Provider>
   )

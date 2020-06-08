@@ -6,28 +6,29 @@ import Header from '../shared/header'
 import Button from '../shared/button'
 import Notification from '../shared/notification'
 import ShowForm from './show-form'
+import { useField } from '../../hooks/index'
 
 const CreateForm = () => {
   const dispatch = useDispatch()
-  const [ title, setTitle ] = useState('')
-  const [ author, setAuthor ] = useState('')
-  const [ url, setUrl ] = useState('')
   const [ errorMessage, setErrorMessage ] = useState(null)
+  const { value: title, bind: bindTitle, reset: titleReset } = useField('title', 'text')
+  const { value: author, bind: bindAuthor, reset: authorReset } = useField('author', 'text')
+  const { value: url, bind: bindUrl, reset: urlReset } = useField('url', 'text')
 
   const createBlog = async (event) => {
     event.preventDefault()
     blogFormRef.current.toggleVisibility()
     try {
       dispatch(createNewBlog({ title, author, url, likes: 0 }))
-      setTitle('')
-      setAuthor('')
-      setUrl('')
       setErrorMessage({ success: `a new blog ${title} ${author} added` })
       setTimeout(() => setErrorMessage(null), 5000)
     } catch (error) {
       setErrorMessage(error.message)
       setTimeout(() => setErrorMessage(null), 5000)
     }
+    titleReset()
+    authorReset()
+    urlReset()
   }
 
   const blogFormRef = React.createRef()
@@ -39,28 +40,13 @@ const CreateForm = () => {
         <form onSubmit={createBlog}>
           <Header name='create new' />
           <div>
-            title <input
-              type="text"
-              value={title}
-              name="title"
-              onChange={({ target }) => setTitle(target.value)}
-            />
+            title <input {...bindTitle} />
           </div>
           <div>
-            author <input
-              type="text"
-              value={author}
-              name="author"
-              onChange={({ target }) => setAuthor(target.value)}
-            />
+            author <input {...bindAuthor} />
           </div>
           <div>
-            url <input
-              type="text"
-              value={url}
-              name="url"
-              onChange={({ target }) => setUrl(target.value)}
-            />
+            url <input {...bindUrl} />
           </div>
           <Button type="submit" text="create" />
         </form>

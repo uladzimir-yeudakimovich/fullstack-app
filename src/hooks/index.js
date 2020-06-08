@@ -21,3 +21,5 @@ export const useCounter = () => {
 
   return { value, increase, decrease, zero }
 }
+
+export const useCountry = () => {}
