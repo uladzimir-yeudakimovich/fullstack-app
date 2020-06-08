@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export const useField = (name, type) => {
   const [value, setValue] = useState('')
@@ -22,4 +23,18 @@ export const useCounter = () => {
   return { value, increase, decrease, zero }
 }
 
-export const useCountry = () => {}
+export const useCountry = source => {
+  const [ value, setValue ] = useState([])
+  const [ valueToShow, setValueToShow ] = useState([])
+
+  useEffect(() => {
+    axios.get(source).then(response => {
+      setValue(response.data)
+      setValueToShow(response.data)
+    })
+  }, [])
+
+  const onChange = (event) => setValueToShow(value.filter(el => el.name.includes(event.target.value)))
+
+  return { value, valueToShow, filter: {onChange} }
+}
