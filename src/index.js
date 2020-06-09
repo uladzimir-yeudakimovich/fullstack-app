@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Alert } from 'react-bootstrap'
 
 import './index.css'
-
+import service from './components/shared/service'
+import Notification from './components/shared/notification'
 import Navigation from './components/navigation/navigation'
 import Routing from './components/routing/routing'
-import service from './components/shared/service'
+import Footer from './components/footer/footer'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -22,7 +22,7 @@ const App = () => {
 
   const login = (user) => {
     setUser(user)
-    setMessage(`welcome ${user}`)
+    setMessage({ success: `welcome ${user}` })
     setTimeout(() => setMessage(null), 10000)
   }
 
@@ -33,17 +33,10 @@ const App = () => {
 
   return (
     <div className="container">
-      {(message &&
-        <Alert variant="success">
-          {message}
-        </Alert>
-      )}
+      <Notification message={message} />
       <Navigation user={user} logout={logout} />
       <Routing user={user} login={login} />
-
-      <div>
-        <i>Fullstack-app 2020</i>
-      </div>
+      <Footer />
     </div>
   )
 }

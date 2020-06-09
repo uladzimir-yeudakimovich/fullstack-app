@@ -8,10 +8,10 @@ import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 
 const Login = ({ onLogin }) => {
-  const [ errorMessage, setErrorMessage ] = useState(null)
-  const history = useHistory()
+  const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
+  const history = useHistory()
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -23,8 +23,8 @@ const Login = ({ onLogin }) => {
       onLogin(login)
       history.push('/')
     } catch (error) {
-      setErrorMessage(error.message)
-      setTimeout(() => setErrorMessage(null), 5000)
+      setMessage(error.message)
+      setTimeout(() => setMessage(null), 5000)
     }
     loginReset()
     passwordReset()
@@ -33,7 +33,7 @@ const Login = ({ onLogin }) => {
   return (
     <>
       <Header name='login' />
-      <Notification message={errorMessage} />
+      <Notification message={message} />
       <Form onSubmit={onSubmit}>
         <Form.Group>
           <Form.Label>login:</Form.Label>

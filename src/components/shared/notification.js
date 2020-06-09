@@ -1,33 +1,22 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
 
 const Notification = ({ message }) => {
   if (message === null) {
     return null
-  }
-
-  const error = {
-    color: 'red',
-    background: 'lightgrey',
-    fontSize: '20px',
-    borderStyle: 'solid',
-    borderRadius: '5px',
-    padding: '10px',
-    marginBtom: '10px'
-  }
-  const success = { ...error, color: 'green' }
-
-  if (message.success) {
+  } else if (message.success) {
     return (
-      <div style={success}>
+      <Alert variant="success">
         {message.success}
-      </div>
+      </Alert>
+    )
+  } else {
+    return (
+      <Alert variant="danger">
+        {message}
+      </Alert>
     )
   }
-  return (
-    <div style={error}>
-      {message}
-    </div>
-  )
 }
 
 export default Notification
