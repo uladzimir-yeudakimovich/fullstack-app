@@ -3,7 +3,11 @@ import { Button, Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Navigation = ({ user, logout }) => {
-  const padding = { padding: 5 }
+  const padding = {
+    padding: 5,
+    // color: 'white',
+    textTransform: 'uppercase'
+  }
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -31,7 +35,7 @@ const Navigation = ({ user, logout }) => {
           <Nav.Link href="#" as="span">
             {user
               ? <em>{user} logged in</em>
-              : <Link to="/login">login</Link>
+              : <Link style={padding} to="/login">login</Link>
             }
           </Nav.Link>
         </Nav>

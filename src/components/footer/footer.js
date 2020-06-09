@@ -1,10 +1,13 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 
 const Footer = () => {
   return (
-    <div>
-      <i>Fullstack-app 2020</i>
-    </div>
+    <Card className="text-center">
+      <Card.Footer className="text-muted">
+        <i>Fullstack-app 2020</i>
+      </Card.Footer>
+    </Card>
   )
 }
 

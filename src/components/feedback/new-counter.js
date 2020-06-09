@@ -1,6 +1,6 @@
 import React from 'react'
+import { Table, Button } from 'react-bootstrap'
 
-import Button from '../shared/button'
 import { useCounter } from '../../hooks/index'
 
 const NewCounter = () => {
@@ -8,10 +8,17 @@ const NewCounter = () => {
 
   return (
     <>
-      <div>{counter.value}</div>
-      <Button handleClick={counter.increase} text='plus' />
-      <Button handleClick={counter.decrease} text='minus' />
-      <Button handleClick={counter.zero} text='zero' />
+      <Table striped>
+        <tbody>
+          <tr>
+            <td>result:</td>
+            <td>{counter.value}</td>
+          </tr>
+        </tbody>
+      </Table>
+      <Button variant="primary" onClick={counter.increase}>plus</Button>{' '}
+      <Button variant="primary" onClick={counter.decrease}>minus</Button>{' '}
+      <Button variant="primary" onClick={counter.zero}>zero</Button>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Table, Button } from 'react-bootstrap'
 
-import Button from '../shared/button'
 import VisibilityFilter from './visibility-filter'
 
 const Counter = () => {
@@ -19,21 +19,25 @@ const Counter = () => {
   return (
     <>
       <VisibilityFilter />
-      <div
-        style={filter === 'ALL' || filter === 'GOOD' ? show : hide}>
-        good: {count.good}
-      </div>
-      <div
-        style={filter === 'ALL' ? show : hide}>
-        ok: {count.ok}
-      </div>
-      <div
-        style={filter === 'ALL' || filter === 'BAD' ? show : hide}>
-        bad: {count.bad}
-      </div>
-      <Button handleClick={() => dispatch({ type: 'GOOD' })} text='good' />
-      <Button handleClick={() => dispatch({ type: 'OK' })} text='ok' />
-      <Button handleClick={() => dispatch({ type: 'BAD' })} text='bad' />
+      <Table striped>
+        <tbody>
+          <tr style={filter === 'ALL' || filter === 'GOOD' ? show : hide}>
+            <td>good:</td>
+            <td>{count.good}</td>
+          </tr>
+          <tr style={filter === 'ALL' ? show : hide}>
+            <td>ok:</td>
+            <td>{count.ok}</td>
+          </tr>
+          <tr style={filter === 'ALL' || filter === 'BAD' ? show : hide}>
+            <td>bad:</td>
+            <td>{count.bad}</td>
+          </tr>
+        </tbody>
+      </Table>
+      <Button variant="primary" onClick={() => dispatch({ type: 'GOOD' })}>good</Button>{' '}
+      <Button variant="primary" onClick={() => dispatch({ type: 'OK' })}>ok</Button>{' '}
+      <Button variant="primary" onClick={() => dispatch({ type: 'BAD' })}>bad</Button>
     </>
   )
 }
