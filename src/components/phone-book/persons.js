@@ -1,6 +1,5 @@
 import React from 'react'
-
-import Button from '../shared/button'
+import { Table, Button } from 'react-bootstrap'
 
 const Persons = ({ persons, deletePerson }) => {
   const btn = {
@@ -8,18 +7,24 @@ const Persons = ({ persons, deletePerson }) => {
   }
 
   return (
-    <ul>
-      {persons.map((person, i) =>
-        <li key={i}>
-          {person.name} {person.number}
-          <Button
-            style={btn}
-            handleClick={() => deletePerson(person.id)}
-            text="delete"
-          />
-        </li>
-      )}
-    </ul>
+    <Table striped>
+      <tbody>
+        {persons.map(person => (
+          <tr key={person.id}>
+            <td>{person.name}</td>
+            <td>{person.number}</td>
+            <td>
+              <Button
+                style={btn}
+                variant="primary"
+                type="submit"
+                onClick={() => deletePerson(person.id)}
+              >delete</Button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   )
 }
 

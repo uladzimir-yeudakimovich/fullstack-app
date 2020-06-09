@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Filter from './filter'
-import Button from '../shared/button'
+import PerconForm from './person-form'
 import Persons from './persons'
 import service from '../shared/service'
 import Notification from '../shared/notification'
@@ -82,15 +82,7 @@ const PhoneBook = () => {
       <Notification message={errorMessage} />
       <Filter searchChange={searchNameChange} />
       <h3>Add a new</h3>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input {...bindName} />
-        </div>
-        <div>
-          number: <input {...bindNumber} />
-        </div>
-        <Button type="submit" text="add" />
-      </form>
+      <PerconForm addPerson={addPerson} bindName={bindName} bindNumber={bindNumber} />
       <h3>Numbers</h3>
       <Persons persons={personsToShow} deletePerson={deletePerson} />
     </>

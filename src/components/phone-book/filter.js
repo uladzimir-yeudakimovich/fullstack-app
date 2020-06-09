@@ -1,11 +1,11 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
 
 const Filter = ({ searchChange }) => {
   return (
     <>
-      filter shown with: <input
-        onChange={searchChange}
-      />
+      <Form.Label>filter shown with:</Form.Label>
+      <Form.Control onChange={searchChange} />
     </>
   )
 }
