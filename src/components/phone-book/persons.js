@@ -2,10 +2,6 @@ import React from 'react'
 import { Table, Button } from 'react-bootstrap'
 
 const Persons = ({ persons, deletePerson }) => {
-  const btn = {
-    margin: '5px 10px'
-  }
-
   return (
     <Table striped>
       <tbody>
@@ -15,7 +11,6 @@ const Persons = ({ persons, deletePerson }) => {
             <td>{person.number}</td>
             <td>
               <Button
-                style={btn}
                 variant="primary"
                 type="submit"
                 onClick={() => deletePerson(person.id)}

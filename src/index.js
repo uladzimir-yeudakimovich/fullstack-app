@@ -2,33 +2,37 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, Redirect
+  Switch, Route, Redirect
 } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 
 import './index.css'
 
 import Anecdotes from './components/anecdotes/index'
 import Blogs from './components/blogs/index'
-import Button from './components/shared/button'
 import Countries from './components/countries/index'
 import Course from './components/course/index'
 import Feedback from './components/feedback/index'
 import Login from './components/login/login'
 import PhoneBook from './components/phone-book/index'
+import Navigation from './components/navigation/navigation'
 import service from './components/shared/service'
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     const _at = window.localStorage.getItem('_at')
     if (_at) { service.setToken(JSON.parse(_at)) }
     const userLogin = window.localStorage.getItem('userLogin')
     if (userLogin) { setUser(JSON.parse(userLogin)) }
-  })
+  }, [setUser])
 
   const login = (user) => {
     setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => setMessage(null), 10000)
   }
 
   const logout = async () => {
@@ -36,25 +40,14 @@ const App = () => {
     setUser(null)
   }
 
-  const padding = { padding: 5 }
-
   return (
     <div className="container">
-      <div>
-        <Link style={padding} to="/anecdotes">anecdotes</Link>
-        <Link style={padding} to="/blogs">blogs</Link>
-        <Link style={padding} to="/countries">countries</Link>
-        <Link style={padding} to="/course">course</Link>
-        <Link style={padding} to="/feedback">feedback</Link>
-        <Link style={padding} to="/phoneBook">phoneBook</Link>
-        {user
-          ? <em>
-            {user} logged in
-            <Button handleClick={logout} text="logout" />
-          </em>
-          : <Link style={padding} to="/login">login</Link>
-        }
-      </div>
+      {(message &&
+        <Alert variant="success">
+          {message}
+        </Alert>
+      )}
+      <Navigation user={user} logout={logout} />
 
       <Switch>
         <Route path="/anecdotes">

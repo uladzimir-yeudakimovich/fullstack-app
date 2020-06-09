@@ -32,7 +32,7 @@ export const useCountry = source => {
       setValue(response.data)
       setValueToShow(response.data)
     })
-  }, [])
+  }, [source])
 
   const onChange = (event) => setValueToShow(value.filter(el => el.name.includes(event.target.value)))
 
@@ -46,7 +46,7 @@ export const useResource = baseUrl => {
     axios.get(baseUrl).then(response => {
       setResources(response.data)
     })
-  }, [])
+  }, [baseUrl])
 
   const create = resource => {
     axios.post(baseUrl, resource).then(response => {

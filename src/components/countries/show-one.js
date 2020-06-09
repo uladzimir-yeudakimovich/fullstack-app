@@ -21,7 +21,7 @@ const ShowOne = ({ country }) => {
         }
         setWeather(response.data.current)
       })
-  }, [])
+  }, [country.name])
 
   return (
     <>

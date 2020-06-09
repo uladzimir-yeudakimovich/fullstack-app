@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 import service from '../shared/service'
 import Header from '../shared/header'
-import Button from '../shared/button'
 import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 
@@ -34,15 +34,15 @@ const Login = ({ onLogin }) => {
     <>
       <Header name='login' />
       <Notification message={errorMessage} />
-      <form onSubmit={onSubmit}>
-        <div>
-          login <input {...bindLogin} />
-        </div>
-        <div>
-          password <input {...bindPassword} />
-        </div>
-        <Button type="submit" text="submit" />
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>login:</Form.Label>
+          <Form.Control {...bindLogin} />
+          <Form.Label>password:</Form.Label>
+          <Form.Control {...bindPassword} />
+          <Button variant="primary" type="submit">login</Button>
+        </Form.Group>
+      </Form>
     </>
   )
 }
