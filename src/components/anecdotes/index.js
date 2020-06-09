@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap'
 
 import Header from '../shared/header'
 import Display from './display'
-import Button from '../shared/button'
 import service from '../shared/service'
 
 const Anecdotes = () => {
@@ -45,8 +45,8 @@ const Anecdotes = () => {
     <>
       <Header name='Anecdotes of the day' />
       <Display anecdote={anecdoteToShow} />
-      <Button handleClick={voteAnecdote} text='vote' />
-      <Button handleClick={nextAnecdote} text='next anecdote' />
+      <Button variant="primary" onClick={voteAnecdote}>vote</Button>{' '}
+      <Button variant="primary" onClick={nextAnecdote}>next anecdote</Button>
       <Header name='Anecdotes with most votes' />
       <Display anecdote={mostVotes} />
     </>
