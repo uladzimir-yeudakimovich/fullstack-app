@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Card } from 'react-bootstrap'
 
 import Filter from './filter'
 import PerconForm from './person-form'
@@ -77,15 +78,18 @@ const PhoneBook = () => {
   }
 
   return (
-    <>
-      <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
-      <Filter searchChange={searchNameChange} />
-      <h3>Add a new</h3>
-      <PerconForm addPerson={addPerson} bindName={bindName} bindNumber={bindNumber} />
-      <h3>Numbers</h3>
-      <Persons persons={personsToShow} deletePerson={deletePerson} />
-    </>
+    <Card>
+      <Card.Header as="h5">Phonebook</Card.Header>
+      <Card.Body>
+        <Card.Title>Find person</Card.Title>
+        <Filter searchChange={searchNameChange} />
+        <Card.Title>Add a new</Card.Title>
+        <Notification message={errorMessage} />
+        <PerconForm addPerson={addPerson} bindName={bindName} bindNumber={bindNumber} />
+        <Card.Title>Numbers</Card.Title>
+        <Persons persons={personsToShow} deletePerson={deletePerson} />
+      </Card.Body>
+    </Card>
   )
 }
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
-import Header from '../shared/header'
 import Display from './display'
 import service from '../shared/service'
 
@@ -42,14 +41,19 @@ const Anecdotes = () => {
   }
 
   return (
-    <>
-      <Header name='Anecdotes of the day' />
-      <Display anecdote={anecdoteToShow} />
-      <Button variant="primary" onClick={voteAnecdote}>vote</Button>{' '}
-      <Button variant="primary" onClick={nextAnecdote}>next anecdote</Button>
-      <Header name='Anecdotes with most votes' />
-      <Display anecdote={mostVotes} />
-    </>
+    <Card>
+      <Card.Header as="h5">Anecdotes</Card.Header>
+      <Card.Body>
+        <Card.Title>Anecdotes of the day</Card.Title>
+        <Display anecdote={anecdoteToShow} />
+        <Button variant="primary" onClick={voteAnecdote}>vote</Button>{' '}
+        <Button variant="primary" onClick={nextAnecdote}>next anecdote</Button>
+      </Card.Body>
+      <Card.Body>
+        <Card.Title>Anecdotes with most votes</Card.Title>
+        <Display anecdote={mostVotes} />
+      </Card.Body>
+    </Card>
   )
 }
 

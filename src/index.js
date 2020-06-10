@@ -22,7 +22,7 @@ const App = () => {
 
   const login = (user) => {
     setUser(user)
-    setMessage({ success: `welcome ${user}` })
+    setMessage({ success: `Welcome ${user}` })
     setTimeout(() => setMessage(null), 10000)
   }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { Card } from 'react-bootstrap'
 import axios from 'axios'
 
 import Weather from './weather'
 import Notification from '../shared/notification'
-import Header from '../shared/header'
 
 const url = 'http://api.weatherstack.com/current'
 const api_key = process.env.REACT_APP_WEATHER_API_KEY
@@ -25,21 +25,23 @@ const ShowOne = ({ country }) => {
 
   return (
     <>
-      <Header name={country.name} />
-      <div>
-        <p>capital {country.capital}</p>
-        <p>population {country.population}</p>
-      </div>
-      <h2>languages</h2>
-      <ul>
-        {country.languages.map((language, i) =>
-          <li key={i}>{language.name}</li>
-        )}
-      </ul>
-      <img style={{ height:'70px' }} src={country.flag} alt='flag' />
-      <h2>Weather in {country.capital}</h2>
-      <Weather weather={weather} />
-      <Notification message={errorMessage} />
+      <Card.Body>
+        <Card.Title>{country.name}</Card.Title>
+        <Card.Text>capital {country.capital}</Card.Text>
+        <Card.Text>population {country.population}</Card.Text>
+        <Card.Title>languages</Card.Title>
+        <ul>
+          {country.languages.map((language, i) =>
+            <li key={i}>{language.name}</li>
+          )}
+        </ul>
+        <Card.Img variant="top" style={{ width: '10rem' }} src={country.flag} alt='flag' />
+      </Card.Body>
+      <Card.Body>
+        <Card.Title>Weather in {country.capital}</Card.Title>
+        <Weather weather={weather} />
+        <Notification message={errorMessage} />
+      </Card.Body>
     </>
   )
 }

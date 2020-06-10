@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 import Header from '../shared/header'
 import Statistics from './statistics'
@@ -44,16 +44,24 @@ const Feedback = () => {
 
   return (
     <Provider store={store}>
-      <Header name='Give feedback' />
-      <Button variant="primary" onClick={increaseGood}>good</Button>{' '}
-      <Button variant="primary" onClick={increaseNeutral}>neutral</Button>{' '}
-      <Button variant="primary" onClick={increaseBad}>bad</Button>
-      <Header name='Statistics' />
-      <Statistics allFeedbacks={allFeedbacks} />
-      <Header name='Counter' />
-      <Counter />
-      <Header name='New counter' />
-      <NewCounter />
+      <Card>
+        <Card.Header as="h5">Give feedback</Card.Header>
+        <Card.Body>
+          <Button variant="primary" onClick={increaseGood}>good</Button>{' '}
+          <Button variant="primary" onClick={increaseNeutral}>neutral</Button>{' '}
+          <Button variant="primary" onClick={increaseBad}>bad</Button>
+          <Card.Header as="h5">Statistics</Card.Header>
+          <Statistics allFeedbacks={allFeedbacks} />
+        </Card.Body>
+        <Card.Header as="h5">Counter</Card.Header>
+        <Card.Body>
+          <Counter />
+        </Card.Body>
+        <Card.Header as="h5">New counter</Card.Header>
+        <Card.Body>
+          <NewCounter />
+        </Card.Body>
+      </Card>
     </Provider>
   )
 }

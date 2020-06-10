@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Card } from 'react-bootstrap'
 
-import Header from '../shared/header'
 import Content from './content'
 import Total from './total'
 import service from '../shared/service'
@@ -16,15 +16,16 @@ const Course = () => {
   }, [])
 
   return (
-    <>
-      {courses.map((course, index) => (
-        <div key={index}>
-          <Header name={course.name} />
+    <Card>
+      <Card.Header as="h5">Courses</Card.Header>
+      {courses.map(course => (
+        <Card.Body key={course.id}>
+          <Card.Title>{course.name}</Card.Title>
           <Content parts={course.parts} />
           <Total parts={course.parts} />
-        </div>
+        </Card.Body>
       ))}
-    </>
+    </Card>
   )
 }
 

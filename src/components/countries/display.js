@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Card } from 'react-bootstrap'
 
 import ShowOne from './show-one'
 import ShowMany from './show-many'
@@ -14,7 +15,9 @@ const Display = ({ countries }) => {
 
   if (countries.length > 10) {
     return (
-      <p>Too many matches, specify another filter</p>
+      <Card.Body>
+        <Card.Text>Too many matches, specify another filter</Card.Text>
+      </Card.Body>
     )
   } else if (countries.length === 1) {
     return (
@@ -31,7 +34,9 @@ const Display = ({ countries }) => {
     )
   } else {
     return (
-      <p>Not found</p>
+      <Card.Body>
+        <Card.Text>Not found</Card.Text>
+      </Card.Body>
     )
   }
 }

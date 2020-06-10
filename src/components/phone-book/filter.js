@@ -1,12 +1,14 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { FormControl, InputGroup } from 'react-bootstrap'
 
 const Filter = ({ searchChange }) => {
   return (
-    <>
-      <Form.Label>filter shown with:</Form.Label>
-      <Form.Control onChange={searchChange} />
-    </>
+    <InputGroup className="mb-3">
+      <InputGroup.Prepend>
+        <InputGroup.Text>search</InputGroup.Text>
+      </InputGroup.Prepend>
+      <FormControl onChange={searchChange} />
+    </InputGroup>
   )
 }
 
