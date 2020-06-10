@@ -17,7 +17,7 @@ const Course = () => {
 
   return (
     <Card>
-      <Card.Header as="h5">Courses</Card.Header>
+      <Card.Header as="h5" className="text-center">Courses</Card.Header>
       {courses.map(course => (
         <Card.Body key={course.id}>
           <Card.Title>{course.name}</Card.Title>

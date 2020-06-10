@@ -42,7 +42,7 @@ const Anecdotes = () => {
 
   return (
     <Card>
-      <Card.Header as="h5">Anecdotes</Card.Header>
+      <Card.Header as="h5" className="text-center">Anecdotes</Card.Header>
       <Card.Body>
         <Card.Title>Anecdotes of the day</Card.Title>
         <Display anecdote={anecdoteToShow} />

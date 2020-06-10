@@ -10,7 +10,7 @@ const Blogs = () => {
   return (
     <Provider store={store}>
       <Card>
-        <Card.Header as="h5">Blogs</Card.Header>
+        <Card.Header as="h5" className="text-center">Blogs</Card.Header>
         <CreateForm />
         <BlogsList />
       </Card>

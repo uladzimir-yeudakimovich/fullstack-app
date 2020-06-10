@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Button, Card } from 'react-bootstrap'
 
-import Header from '../shared/header'
 import Statistics from './statistics'
 import Counter from './counter'
 import counterReducer from '../../reducers/counter-reducer'
@@ -45,7 +44,7 @@ const Feedback = () => {
   return (
     <Provider store={store}>
       <Card>
-        <Card.Header as="h5">Give feedback</Card.Header>
+        <Card.Header as="h5" className="text-center">Give feedback</Card.Header>
         <Card.Body>
           <Button variant="primary" onClick={increaseGood}>good</Button>{' '}
           <Button variant="primary" onClick={increaseNeutral}>neutral</Button>{' '}

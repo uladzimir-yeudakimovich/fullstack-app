@@ -31,7 +31,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <Card>
-      <Card.Header as="h5">login</Card.Header>
+      <Card.Header as="h5" className="text-center">login</Card.Header>
       <Card.Body>
         <Notification message={message} />
         <Form onSubmit={onSubmit}>

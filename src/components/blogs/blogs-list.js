@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
+import styled from 'styled-components'
 // import { useRouteMatch } from 'react-router-dom'
 
 import ShowBlogInfo from './show-blog-info'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
+import service from '../shared/service'
 
 const BlogsList = () => {
   const dispatch = useDispatch()
@@ -15,6 +17,7 @@ const BlogsList = () => {
   //   : null
 
   useEffect(() => {
+    service.setToken(JSON.parse(window.localStorage.getItem('_at')))
     dispatch(initializeBlogs())
   }, [dispatch])
 
@@ -29,12 +32,12 @@ const BlogsList = () => {
     }
   }
 
-  const blogStyle = {
-    border: '2px solid',
-    borderRadius: '4px',
-    margin: '3px 0',
-    padding: '3px'
-  }
+  const Blog = styled.div`
+    border: 2px solid;
+    border-radius: 4px;
+    margin: 3px 0;
+    padding: 3px;
+  `
 
   const userLogin = JSON.parse(window.localStorage.getItem('userLogin'))
   const showButton = { display: ''  }
@@ -43,7 +46,7 @@ const BlogsList = () => {
   return (
     <Card.Body>
       {blogs.map(blog =>
-        <div key={blog.id} style={blogStyle}>
+        <Blog key={blog.id}>
           <span>{blog.title} {blog.author}</span>{' '}
           <ShowBlogInfo id={blog.id} buttonLabel="view">
             <div>{blog.url}</div>
@@ -58,7 +61,7 @@ const BlogsList = () => {
               onClick={() => deleteBlog(blog)}
             >remove</Button>
           </ShowBlogInfo>
-        </div>
+        </Blog>
       )}
     </Card.Body>
   )

@@ -79,7 +79,7 @@ const PhoneBook = () => {
 
   return (
     <Card>
-      <Card.Header as="h5">Phonebook</Card.Header>
+      <Card.Header as="h5" className="text-center">Phonebook</Card.Header>
       <Card.Body>
         <Card.Title>Find person</Card.Title>
         <Filter searchChange={searchNameChange} />
