@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '../shared/button'
-
 const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
   return (
     <form onSubmit={submit}>
@@ -24,7 +22,7 @@ const LoginForm = ({ login, setLogin, password, setPassword, submit }) => {
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <Button type="submit" text="submit" />
+      <button type="submit">submit</button>
     </form>
   )
 }

@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 import ShowBlogInfo from './show-blog-info'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
-import service from '../shared/service'
 
 const BlogsList = () => {
   const dispatch = useDispatch()
@@ -17,7 +16,6 @@ const BlogsList = () => {
   //   : null
 
   useEffect(() => {
-    service.setToken(JSON.parse(window.localStorage.getItem('_at')))
     dispatch(initializeBlogs())
   }, [dispatch])
 

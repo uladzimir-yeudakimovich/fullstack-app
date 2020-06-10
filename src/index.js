@@ -12,7 +12,7 @@ const App = () => {
   const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('userLogin')))
   const [message, setMessage] = useState(null)
 
-  const login = (user) => {
+  const login = user => {
     setUser(user)
     setMessage({ success: `Welcome ${user}` })
     setTimeout(() => setMessage(null), 10000)

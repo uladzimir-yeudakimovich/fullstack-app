@@ -25,6 +25,7 @@ const blogReducer = (state = [], action) => {
 }
 
 export const initializeBlogs = () => {
+  service.setToken(JSON.parse(window.localStorage.getItem('_at')))
   return async dispatch => {
     try {
       const blogs = await service.getAll('blogs')
