@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 import service from '../shared/service'
-import Header from '../shared/header'
 import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 
@@ -31,19 +30,29 @@ const Login = ({ onLogin }) => {
   }
 
   return (
-    <>
-      <Header name='login' />
-      <Notification message={message} />
-      <Form onSubmit={onSubmit}>
-        <Form.Group>
-          <Form.Label>login:</Form.Label>
-          <Form.Control {...bindLogin} />
-          <Form.Label>password:</Form.Label>
-          <Form.Control {...bindPassword} />
-          <Button variant="primary" type="submit">login</Button>
-        </Form.Group>
-      </Form>
-    </>
+    <Card>
+      <Card.Header as="h5">login</Card.Header>
+      <Card.Body>
+        <Notification message={message} />
+        <Form onSubmit={onSubmit}>
+          <Form.Group>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text>login:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl {...bindLogin} />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text>password:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl {...bindPassword} />
+            </InputGroup>
+            <Button variant="primary" type="submit">login</Button>
+          </Form.Group>
+        </Form>
+      </Card.Body>
+    </Card>
   )
 }
 

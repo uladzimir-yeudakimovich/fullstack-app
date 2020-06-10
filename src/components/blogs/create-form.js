@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap'
 
 import { createNewBlog } from '../../reducers/blog-reducer'
-import Header from '../shared/header'
-import Button from '../shared/button'
 import Notification from '../shared/notification'
 import ShowForm from './show-form'
 import { useField } from '../../hooks/index'
@@ -34,24 +33,35 @@ const CreateForm = () => {
   const blogFormRef = React.createRef()
 
   return (
-    <>
+    <Card.Body>
       <Notification message={errorMessage} />
       <ShowForm buttonLabel='create new blog' ref={blogFormRef}>
-        <form onSubmit={createBlog}>
-          <Header name='create new' />
-          <div>
-            title <input {...bindTitle} />
-          </div>
-          <div>
-            author <input {...bindAuthor} />
-          </div>
-          <div>
-            url <input {...bindUrl} />
-          </div>
-          <Button type="submit" text="create" />
-        </form>
+        <Form onSubmit={createBlog}>
+          <Card.Title>Create new</Card.Title>
+          <Form.Group>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text>title:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl {...bindTitle} />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text>author:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl {...bindAuthor} />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text>url:</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl {...bindUrl} />
+            </InputGroup>
+            <Button variant="primary" type="submit">create</Button>
+          </Form.Group>
+        </Form>
       </ShowForm>
-    </>
+    </Card.Body>
   )
 }
 

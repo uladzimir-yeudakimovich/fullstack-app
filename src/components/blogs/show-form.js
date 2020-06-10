@@ -1,7 +1,6 @@
 import React, { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
-
-import Button from '../shared/button'
+import { Button } from 'react-bootstrap'
 
 const ShowForm = React.forwardRef((props, ref) => {
   const [ visible, setVisible ] = useState(false)
@@ -23,12 +22,11 @@ const ShowForm = React.forwardRef((props, ref) => {
 
   return (
     <div style={showFormStyle}>
-      <div style={hideWhenVisible}>
-        <Button handleClick={toggleVisibility} text={props.buttonLabel} />
-      </div>
+      <Button variant="primary" style={hideWhenVisible} onClick={toggleVisibility}>{props.buttonLabel}</Button>
+
       <div style={showWhenVisible}>
         {props.children}
-        <Button handleClick={toggleVisibility} text="cancel" />
+        <Button variant="primary" onClick={toggleVisibility}>cancel</Button>
       </div>
     </div>
   )

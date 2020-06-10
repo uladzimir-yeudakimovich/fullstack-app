@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Button, Card } from 'react-bootstrap'
 // import { useRouteMatch } from 'react-router-dom'
 
-import Button from '../shared/button'
 import ShowBlogInfo from './show-blog-info'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
 
@@ -41,26 +41,26 @@ const BlogsList = () => {
   const hideButton = { display: 'none' }
 
   return (
-    <div>
+    <Card.Body>
       {blogs.map(blog =>
         <div key={blog.id} style={blogStyle}>
-          <span>{blog.title} {blog.author}</span>
+          <span>{blog.title} {blog.author}</span>{' '}
           <ShowBlogInfo id={blog.id} buttonLabel="view">
             <div>{blog.url}</div>
             <div>
-              {blog.likes}
-              <Button handleClick={() => addLike(blog)} text="like" />
+              {blog.likes}{' '}
+              <Button variant="primary" onClick={() => addLike(blog)}>like</Button>
             </div>
             <div>{blog.user.name}</div>
             <Button
               style={userLogin === blog.user.login ? showButton : hideButton}
-              handleClick={() => deleteBlog(blog)}
-              text="remove"
-            />
+              variant="danger"
+              onClick={() => deleteBlog(blog)}
+            >remove</Button>
           </ShowBlogInfo>
         </div>
       )}
-    </div>
+    </Card.Body>
   )
 }
 

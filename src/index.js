@@ -33,8 +33,8 @@ const App = () => {
 
   return (
     <div className="container">
-      <Notification message={message} />
       <Navigation user={user} logout={logout} />
+      <Notification message={message} />
       <Routing user={user} login={login} />
       <Footer />
     </div>
