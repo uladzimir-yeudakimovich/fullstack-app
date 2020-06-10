@@ -26,3 +26,7 @@ Runs the server.
 ### `npm run cypress:open`
 
 Before run front-end and back-end, then run this script
+
+### `npm outdated --depth 0`
+
+Check dependencies
