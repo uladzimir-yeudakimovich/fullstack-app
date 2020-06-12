@@ -42,11 +42,15 @@ export const initializeBlogs = () => {
 
 export const createNewBlog = blog => {
   return async dispatch => {
-    const newBlog = await service.create('blogs', blog)
-    dispatch({
-      type: 'NEW_BLOG',
-      data: newBlog,
-    })
+    try {
+      const newBlog = await service.create('blogs', blog)
+      dispatch({
+        type: 'NEW_BLOG',
+        data: newBlog,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

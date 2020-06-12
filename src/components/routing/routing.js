@@ -8,6 +8,7 @@ import Course from '../course/index'
 import Feedback from '../feedback/index'
 import Login from '../login/login'
 import PhoneBook from '../phone-book/index'
+import Registration from '../registration/registration'
 
 const Routing = ({ user, login }) => {
   return (
@@ -35,6 +36,9 @@ const Routing = ({ user, login }) => {
       </Route>
       <Route path="/login">
         <Login onLogin={login} />
+      </Route>
+      <Route path="/registration">
+        <Registration onRegistration={login} />
       </Route>
       <Route path="/phoneBook">
         <PhoneBook />

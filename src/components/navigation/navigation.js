@@ -38,6 +38,12 @@ const Navigation = ({ user, logout }) => {
               : <Link style={padding} to="/login">login</Link>
             }
           </Nav.Link>
+          <Nav.Link href="#" as="span">
+            {user
+              ? <></>
+              : <Link style={padding} to="/registration">registration</Link>
+            }
+          </Nav.Link>
         </Nav>
         {user
           ? <Button variant="primary" onClick={logout}>logout</Button>
