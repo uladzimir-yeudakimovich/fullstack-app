@@ -9,7 +9,7 @@ import { useField } from '../../hooks/index'
 const Registration = ({ onRegistration }) => {
   const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
-  const { value: name, bind: bindName, reset: nameReset } = useField('login', 'text')
+  const { value: name, bind: bindName, reset: nameReset } = useField('name', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
   const history = useHistory()
 
@@ -17,11 +17,16 @@ const Registration = ({ onRegistration }) => {
     event.preventDefault()
     try {
       const user = await service.getToken('registration', { login, name, password })
-      window.localStorage.setItem('_at', JSON.stringify(user.token))
-      window.localStorage.setItem('userLogin', JSON.stringify(login))
-      service.setToken(user.token)
-      onRegistration(login)
-      history.push('/')
+      if (user.status === 400) {
+        setMessage(user.error)
+        setTimeout(() => setMessage(null), 10000)
+      } else {
+        window.localStorage.setItem('_at', JSON.stringify(user.token))
+        window.localStorage.setItem('userLogin', JSON.stringify(login))
+        service.setToken(user.token)
+        onRegistration(login)
+        history.push('/')
+      }
     } catch (error) {
       setMessage(error.message)
       setTimeout(() => setMessage(null), 5000)

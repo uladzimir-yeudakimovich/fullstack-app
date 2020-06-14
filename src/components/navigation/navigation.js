@@ -39,10 +39,7 @@ const Navigation = ({ user, logout }) => {
             }
           </Nav.Link>
           <Nav.Link href="#" as="span">
-            {user
-              ? <></>
-              : <Link style={padding} to="/registration">registration</Link>
-            }
+            {user ? <></> : <Link style={padding} to="/registration">registration</Link>}
           </Nav.Link>
         </Nav>
         {user
