@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-import service from '../shared/service'
 import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
+import { loginUser } from '../../reducers/auth-reducer'
 
 const Login = ({ onLogin }) => {
   const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    try {
-      const user = await service.getToken('login', { login, password })
-      window.localStorage.setItem('_at', JSON.stringify(user.token))
-      window.localStorage.setItem('userLogin', JSON.stringify(login))
-      service.setToken(user.token)
+    await dispatch(loginUser(login, password))
+    if (window.localStorage.getItem('userLogin')) {
       onLogin(login)
       history.push('/')
-    } catch (error) {
-      setMessage(error.message)
+    } else {
+      setMessage('Wrong login or password!')
       setTimeout(() => setMessage(null), 5000)
     }
     loginReset()
