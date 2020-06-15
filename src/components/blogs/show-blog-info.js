@@ -1,5 +1,4 @@
 import React, { useState, useImperativeHandle } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 
@@ -19,10 +18,8 @@ const ShowBlogInfo = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <Link to={`/blogs/${props.id}`}>
-        <Button variant="primary" style={hideWhenVisible} onClick={toggleVisibility}>{props.buttonLabel}</Button>
-        <Button variant="primary" style={showWhenVisible} onClick={toggleVisibility}>hide</Button>
-      </Link>
+      <Button variant="primary" style={hideWhenVisible} onClick={toggleVisibility}>{props.buttonLabel}</Button>
+      <Button variant="primary" style={showWhenVisible} onClick={toggleVisibility}>hide</Button>
       <div style={showWhenVisible}>{props.children}</div>
     </>
   )

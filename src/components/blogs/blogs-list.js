@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Button, Card } from 'react-bootstrap'
 import styled from 'styled-components'
-// import { useRouteMatch } from 'react-router-dom'
 
 import ShowBlogInfo from './show-blog-info'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
@@ -10,10 +10,6 @@ import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog
 const BlogsList = () => {
   const dispatch = useDispatch()
   const blogs = useSelector(state => state)
-  // const match = useRouteMatch('/blogs/:id')
-  // const blog = match
-  //   ? blogs.find(el => el.id === Number(match.params.id))
-  //   : null
 
   useEffect(() => {
     dispatch(initializeBlogs())
@@ -45,7 +41,7 @@ const BlogsList = () => {
     <Card.Body>
       {blogs.map(blog =>
         <Blog key={blog.id}>
-          <span>{blog.title} {blog.author}</span>{' '}
+          <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
           <ShowBlogInfo id={blog.id} buttonLabel="view">
             <div>{blog.url}</div>
             <div>
