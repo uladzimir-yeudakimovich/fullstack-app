@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-import service from '../shared/service'
 import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
+import { registrationUser } from '../../reducers/auth-reducer'
 
 const Registration = ({ onRegistration }) => {
   const [message, setMessage] = useState(null)
@@ -12,24 +13,19 @@ const Registration = ({ onRegistration }) => {
   const { value: name, bind: bindName, reset: nameReset } = useField('name', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
   const history = useHistory()
+  const dispatch = useDispatch()
 
-  const onSubmit = async (event) => {
+  const onSubmit = async event => {
     event.preventDefault()
-    try {
-      const user = await service.getToken('registration', { login, name, password })
-      if (user.status === 400) {
-        setMessage(user.error)
-        setTimeout(() => setMessage(null), 10000)
-      } else {
-        window.localStorage.setItem('_at', JSON.stringify(user.token))
-        window.localStorage.setItem('userLogin', JSON.stringify(login))
-        service.setToken(user.token)
-        onRegistration(login)
-        history.push('/')
-      }
-    } catch (error) {
-      setMessage(error.message)
-      setTimeout(() => setMessage(null), 5000)
+    await dispatch(registrationUser(login, name, password))
+    const error = JSON.parse(window.localStorage.getItem('error'))
+    if (window.localStorage.getItem('userLogin')) {
+      onRegistration(login)
+      history.push('/')
+    } else if (error) {
+      setMessage(error)
+      window.localStorage.clear()
+      setTimeout(() => setMessage(null), 10000)
     }
     loginReset()
     nameReset()

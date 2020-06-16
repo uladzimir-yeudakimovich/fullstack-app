@@ -2,13 +2,13 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { Card } from 'react-bootstrap'
 
-import store from './store'
+import blogsStore from './blog-store'
 import BlogsList from './blogs-list'
 import CreateForm from './create-form'
 
 const Blogs = () => {
   return (
-    <Provider store={store}>
+    <Provider store={blogsStore}>
       <Card>
         <Card.Header as="h5" className="text-center">Blogs</Card.Header>
         <CreateForm />

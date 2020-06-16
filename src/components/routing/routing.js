@@ -1,7 +1,9 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import store from '../blogs/store'
+
+import authStore from '../auth/auth-store'
+import blogsStore from '../blogs/blog-store'
 
 import Anecdotes from '../anecdotes/index'
 import Blogs from '../blogs/index'
@@ -9,9 +11,9 @@ import BlogInfo from '../blogs/blog-info'
 import Countries from '../countries/index'
 import Course from '../course/index'
 import Feedback from '../feedback/index'
-import Login from '../login/login'
+import Login from '../auth/login'
 import PhoneBook from '../phone-book/index'
-import Registration from '../registration/registration'
+import Registration from '../auth/registration'
 
 const Routing = ({ user, login }) => {
   return (
@@ -20,12 +22,22 @@ const Routing = ({ user, login }) => {
         <Anecdotes />
       </Route>
       <Route path="/blogs/:id">
-        <Provider store={store}>
-          {user ? <BlogInfo /> : <Redirect to="/login" />}
-        </Provider>
+        {user ?
+          <Provider store={blogsStore}>
+            <BlogInfo />
+          </Provider> :
+          <Provider store={authStore}>
+            <Redirect to="/login" />
+          </Provider>
+        }
       </Route>
       <Route path="/blogs">
-        {user ? <Blogs /> : <Redirect to="/login" />}
+        {user ?
+          <Blogs /> :
+          <Provider store={authStore}>
+            <Redirect to="/login" />
+          </Provider>
+        }
       </Route>
       <Route path="/countries/:id">
         <Countries />
@@ -40,10 +52,14 @@ const Routing = ({ user, login }) => {
         <Feedback />
       </Route>
       <Route path="/login">
-        <Login onLogin={login} />
+        <Provider store={authStore}>
+          <Login onLogin={login} />
+        </Provider>
       </Route>
       <Route path="/registration">
-        <Registration onRegistration={login} />
+        <Provider store={authStore}>
+          <Registration onRegistration={login} />
+        </Provider>
       </Route>
       <Route path="/phoneBook">
         <PhoneBook />
