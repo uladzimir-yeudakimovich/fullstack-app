@@ -15,32 +15,18 @@ const Registration = ({ onRegistration }) => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const onSubmit = async (event) => {
+  const onSubmit = async event => {
     event.preventDefault()
     await dispatch(registrationUser(login, name, password))
+    const error = JSON.parse(window.localStorage.getItem('error'))
     if (window.localStorage.getItem('userLogin')) {
       onRegistration(login)
       history.push('/')
-    } else {
-      setMessage('Wrong login or password!')
-      setTimeout(() => setMessage(null), 5000)
+    } else if (error) {
+      setMessage(error)
+      window.localStorage.clear()
+      setTimeout(() => setMessage(null), 10000)
     }
-    // try {
-    //   const user = await service.getToken('registration', { login, name, password })
-    //   if (user.status === 400) {
-    //     setMessage(user.error)
-    //     setTimeout(() => setMessage(null), 10000)
-    //   } else {
-    //     window.localStorage.setItem('_at', JSON.stringify(user.token))
-    //     window.localStorage.setItem('userLogin', JSON.stringify(login))
-    //     service.setToken(user.token)
-    //     onRegistration(login)
-    //     history.push('/')
-    //   }
-    // } catch (error) {
-    //   setMessage(error.message)
-    //   setTimeout(() => setMessage(null), 5000)
-    // }
     loginReset()
     nameReset()
     passwordReset()
