@@ -17,16 +17,20 @@ const loginReducer = (state, action) => {
 
 export const loginUser = (login, password) => {
   return async dispatch => {
-    const user = await service.getToken('login', { login, password })
-    if (user) {
-      window.localStorage.setItem('_at', JSON.stringify(user.token))
-      window.localStorage.setItem('userLogin', JSON.stringify(login))
-      service.setToken(user.token)
+    try {
+      const user = await service.getToken('login', { login, password })
+      if (user) {
+        window.localStorage.setItem('_at', JSON.stringify(user.token))
+        window.localStorage.setItem('userLogin', JSON.stringify(login))
+        service.setToken(user.token)
+      }
+      dispatch({
+        type: 'LOGIN_USER',
+        data: user,
+      })
+    } catch (error) {
+      // console.log(error)
     }
-    dispatch({
-      type: 'LOGIN_USER',
-      data: user,
-    })
   }
 }
 

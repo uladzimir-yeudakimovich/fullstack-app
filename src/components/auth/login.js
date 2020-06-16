@@ -14,14 +14,14 @@ const Login = ({ onLogin }) => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const onSubmit = async (event) => {
+  const onSubmit = async event => {
     event.preventDefault()
     await dispatch(loginUser(login, password))
     if (window.localStorage.getItem('userLogin')) {
       onLogin(login)
       history.push('/')
     } else {
-      setMessage('Wrong login or password!')
+      setMessage('Invalid username or password!')
       setTimeout(() => setMessage(null), 5000)
     }
     loginReset()
