@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 import { loginUser } from '../../reducers/auth-reducer'
 
 const Login = () => {
-  const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
   const history = useHistory()
@@ -19,9 +17,6 @@ const Login = () => {
     await dispatch(loginUser(login, password))
     if (window.localStorage.getItem('userName')) {
       history.push('/')
-    } else {
-      setMessage('Invalid username or password!')
-      setTimeout(() => setMessage(null), 5000)
     }
     loginReset()
     passwordReset()
@@ -31,7 +26,6 @@ const Login = () => {
     <Card>
       <Card.Header as="h5" className="text-center">login</Card.Header>
       <Card.Body>
-        <Notification message={message} />
         <Form onSubmit={onSubmit}>
           <Form.Group>
             <InputGroup className="mb-3">

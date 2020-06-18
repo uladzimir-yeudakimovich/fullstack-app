@@ -1,26 +1,8 @@
 import service from '../components/shared/service'
 
 const loginReducer = (state, action) => {
-  switch (action.type) {
-  case 'INITIALIZE_USER': {
-    state = action.data
-    return state
-  }
-  case 'LOGIN_USER': {
-    state = action.data
-    return state
-  }
-  case 'REGISTRATION_USER': {
-    state = action.data
-    return state
-  }
-  case 'LOGOUT_USER': {
-    state = action.data
-    return state
-  }
-  default:
-    return state
-  }
+  state = action.data
+  return state
 }
 
 export const initializeUser = () => {
@@ -52,8 +34,14 @@ export const loginUser = (login, password) => {
         type: 'LOGIN_USER',
         data: userInfo,
       })
-    } catch (error) {
-      // console.log(error)
+    } catch (err) {
+      dispatch({
+        type: 'ERROR',
+        data: {
+          status: 400,
+          error: 'Invalid username or password!'
+        },
+      })
     }
   }
 }
@@ -61,9 +49,7 @@ export const loginUser = (login, password) => {
 export const registrationUser = (login, name, password) => {
   return async dispatch => {
     const userInfo = await service.getToken('registration', { login, name, password })
-    if (userInfo.status === 400) {
-      window.localStorage.setItem('error', JSON.stringify(userInfo.error))
-    } else {
+    if (userInfo.status !== 400) {
       window.localStorage.setItem('_at', JSON.stringify(userInfo.token))
       const name = userInfo.user.name ? userInfo.user.name : userInfo.user.login
       window.localStorage.setItem('userName', JSON.stringify(name))

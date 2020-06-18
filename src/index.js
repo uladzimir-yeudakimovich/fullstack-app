@@ -14,23 +14,30 @@ import { initializeUser } from './reducers/auth-reducer'
 const App = () => {
   const dispatch = useDispatch()
   const [message, setMessage] = useState(null)
-  const userInfo = useSelector(state => state)
+  const user = useSelector(state => state)
 
   useEffect(() => {
     dispatch(initializeUser())
   }, [dispatch])
 
-  const login = () => {
-    const userName = JSON.parse(window.localStorage.getItem('userName'))
-    setMessage({ success: `Welcome ${userName}` })
-    setTimeout(() => setMessage(null), 10000)
+  if (user) {
+    if (user.status === 400) {
+      setMessage(user.error)
+      setTimeout(() => setMessage(null), 10000)
+      dispatch(initializeUser())
+    } else if (user.message === 'Successful login.' || user.message === 'Successful registration.') {
+      const userName = JSON.parse(window.localStorage.getItem('userName'))
+      setMessage({ success: `Welcome ${userName}` })
+      setTimeout(() => setMessage(null), 10000)
+      dispatch(initializeUser())
+    }
   }
 
   return (
     <div className="container">
-      <Navigation user={userInfo} />
+      <Navigation user={user} />
       <Notification message={message} />
-      <Routing user={userInfo} />
+      <Routing user={user} />
       <Footer />
     </div>
   )

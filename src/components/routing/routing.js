@@ -1,9 +1,5 @@
 import React from 'react'
-import { Provider } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
-
-import authStore from '../auth/auth-store'
-import blogsStore from '../blogs/blog-store'
 
 import Anecdotes from '../anecdotes/index'
 import Blogs from '../blogs/index'
@@ -22,22 +18,10 @@ const Routing = ({ user }) => {
         <Anecdotes />
       </Route>
       <Route path="/blogs/:id">
-        {user ?
-          <Provider store={blogsStore}>
-            <BlogInfo />
-          </Provider> :
-          <Provider store={authStore}>
-            <Redirect to="/login" />
-          </Provider>
-        }
+        {user ? <BlogInfo /> : <Redirect to="/login" />}
       </Route>
       <Route path="/blogs">
-        {user ?
-          <Blogs /> :
-          <Provider store={authStore}>
-            <Redirect to="/login" />
-          </Provider>
-        }
+        {user ? <Blogs /> : <Redirect to="/login" />}
       </Route>
       <Route path="/countries/:id">
         <Countries />
@@ -52,14 +36,10 @@ const Routing = ({ user }) => {
         <Feedback />
       </Route>
       <Route path="/login">
-        <Provider store={authStore}>
-          <Login />
-        </Provider>
+        <Login />
       </Route>
       <Route path="/registration">
-        <Provider store={authStore}>
-          <Registration />
-        </Provider>
+        <Registration />
       </Route>
       <Route path="/phoneBook">
         <PhoneBook />
