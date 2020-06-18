@@ -7,7 +7,7 @@ import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 import { registrationUser } from '../../reducers/auth-reducer'
 
-const Registration = ({ onRegistration }) => {
+const Registration = () => {
   const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
   const { value: name, bind: bindName, reset: nameReset } = useField('name', 'text')
@@ -19,8 +19,7 @@ const Registration = ({ onRegistration }) => {
     event.preventDefault()
     await dispatch(registrationUser(login, name, password))
     const error = JSON.parse(window.localStorage.getItem('error'))
-    if (window.localStorage.getItem('userLogin')) {
-      onRegistration(login)
+    if (window.localStorage.getItem('userName')) {
       history.push('/')
     } else if (error) {
       setMessage(error)

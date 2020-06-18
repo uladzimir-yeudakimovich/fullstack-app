@@ -33,7 +33,7 @@ const BlogsList = () => {
     padding: 3px;
   `
 
-  const userLogin = JSON.parse(window.localStorage.getItem('userLogin'))
+  const userName = JSON.parse(window.localStorage.getItem('userName'))
   const showButton = { display: ''  }
   const hideButton = { display: 'none' }
 
@@ -50,7 +50,7 @@ const BlogsList = () => {
             </div>
             <div>{blog.user.name}</div>
             <Button
-              style={userLogin === blog.user.login ? showButton : hideButton}
+              style={userName === blog.user.login ? showButton : hideButton}
               variant="danger"
               onClick={() => deleteBlog(blog)}
             >remove</Button>

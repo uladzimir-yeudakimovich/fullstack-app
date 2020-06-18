@@ -7,7 +7,7 @@ import Notification from '../shared/notification'
 import { useField } from '../../hooks/index'
 import { loginUser } from '../../reducers/auth-reducer'
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [message, setMessage] = useState(null)
   const { value: login, bind: bindLogin, reset: loginReset } = useField('login', 'text')
   const { value: password, bind: bindPassword, reset: passwordReset } = useField('password', 'password')
@@ -17,8 +17,7 @@ const Login = ({ onLogin }) => {
   const onSubmit = async event => {
     event.preventDefault()
     await dispatch(loginUser(login, password))
-    if (window.localStorage.getItem('userLogin')) {
-      onLogin(login)
+    if (window.localStorage.getItem('userName')) {
       history.push('/')
     } else {
       setMessage('Invalid username or password!')

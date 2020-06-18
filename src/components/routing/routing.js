@@ -15,7 +15,7 @@ import Login from '../auth/login'
 import PhoneBook from '../phone-book/index'
 import Registration from '../auth/registration'
 
-const Routing = ({ user, login }) => {
+const Routing = ({ user }) => {
   return (
     <Switch>
       <Route path="/anecdotes">
@@ -53,12 +53,12 @@ const Routing = ({ user, login }) => {
       </Route>
       <Route path="/login">
         <Provider store={authStore}>
-          <Login onLogin={login} />
+          <Login />
         </Provider>
       </Route>
       <Route path="/registration">
         <Provider store={authStore}>
-          <Registration onRegistration={login} />
+          <Registration />
         </Provider>
       </Route>
       <Route path="/phoneBook">

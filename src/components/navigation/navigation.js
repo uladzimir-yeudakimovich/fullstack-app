@@ -1,8 +1,17 @@
 import React from 'react'
 import { Button, Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-const Navigation = ({ user, logout }) => {
+import { removeUser } from '../../reducers/auth-reducer'
+
+const Navigation = ({ user }) => {
+  const dispatch = useDispatch()
+
+  const logout = () => {
+    dispatch(removeUser())
+  }
+
   const padding = {
     padding: 5,
     // color: 'white',
@@ -34,7 +43,7 @@ const Navigation = ({ user, logout }) => {
           </Nav.Link>
           <Nav.Link href="#" as="span">
             {user
-              ? <em>{user} logged in</em>
+              ? <em>{user.user.name ? user.user.name : user.user.login} logged in</em>
               : <Link style={padding} to="/login">login</Link>
             }
           </Nav.Link>

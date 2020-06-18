@@ -9,7 +9,7 @@ export const useField = (name, type) => {
 
   return {
     value,
-    bind: {id, type, value, name, onChange},
+    bind: { id, type, value, name, onChange },
     reset
   }
 }
@@ -36,7 +36,7 @@ export const useCountry = source => {
 
   const onChange = (event) => setValueToShow(value.filter(el => el.name.includes(event.target.value)))
 
-  return { value, valueToShow, filter: {onChange} }
+  return { value, valueToShow, filter: { onChange } }
 }
 
 export const useResource = baseUrl => {
