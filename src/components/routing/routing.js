@@ -13,6 +13,7 @@ import Feedback from '../feedback/index'
 import Login from '../auth/login'
 import PhoneBook from '../phone-book/index'
 import Registration from '../auth/registration'
+import Users from '../users/index'
 
 const Routing = ({ user }) => {
   if (!user) {
@@ -22,7 +23,7 @@ const Routing = ({ user }) => {
   return (
     <Switch>
       <Route path="/anecdotes">
-        <Anecdotes />
+        {user ? <Anecdotes /> : <Redirect to="/login" />}
       </Route>
       <Route path="/blogs/:id">
         {user ?
@@ -35,26 +36,29 @@ const Routing = ({ user }) => {
       <Route path="/blogs">
         {user ? <Blogs /> : <Redirect to="/login" />}
       </Route>
+      <Route path="/users">
+        {user ? <Users /> : <Redirect to="/login" />}
+      </Route>
       <Route path="/countries/:id">
-        <Countries />
+        {user ? <Countries /> : <Redirect to="/login" />}
       </Route>
       <Route path="/countries">
-        <Countries />
+        {user ? <Countries /> : <Redirect to="/login" />}
       </Route>
       <Route path="/course">
-        <Course />
+        {user ? <Course /> : <Redirect to="/login" />}
       </Route>
       <Route path="/feedback">
-        <Feedback />
+        {user ? <Feedback /> : <Redirect to="/login" />}
+      </Route>
+      <Route path="/phoneBook">
+        {user ? <PhoneBook /> : <Redirect to="/login" />}
       </Route>
       <Route path="/login">
         <Login />
       </Route>
       <Route path="/registration">
         <Registration />
-      </Route>
-      <Route path="/phoneBook">
-        <PhoneBook />
       </Route>
       <Route path="/">
         <Anecdotes />

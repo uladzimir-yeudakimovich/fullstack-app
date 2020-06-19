@@ -30,6 +30,9 @@ const Navigation = ({ user }) => {
             <Link style={padding} to="/blogs">blogs</Link>
           </Nav.Link>
           <Nav.Link href="#" as="span">
+            <Link style={padding} to="/users">users</Link>
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
             <Link style={padding} to="/countries">countries</Link>
           </Nav.Link>
           <Nav.Link href="#" as="span">
