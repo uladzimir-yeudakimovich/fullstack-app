@@ -15,6 +15,10 @@ import PhoneBook from '../phone-book/index'
 import Registration from '../auth/registration'
 
 const Routing = ({ user }) => {
+  if (!user) {
+    user = JSON.parse(window.localStorage.getItem('userName'))
+  }
+
   return (
     <Switch>
       <Route path="/anecdotes">
