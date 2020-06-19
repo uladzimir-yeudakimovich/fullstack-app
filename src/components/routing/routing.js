@@ -1,5 +1,8 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
+
+import blogsStore from '../blogs/blog-store'
 
 import Anecdotes from '../anecdotes/index'
 import Blogs from '../blogs/index'
@@ -18,7 +21,12 @@ const Routing = ({ user }) => {
         <Anecdotes />
       </Route>
       <Route path="/blogs/:id">
-        {user ? <BlogInfo /> : <Redirect to="/login" />}
+        {user ?
+          <Provider store={blogsStore}>
+            <BlogInfo />
+          </Provider> :
+          <Redirect to="/login" />
+        }
       </Route>
       <Route path="/blogs">
         {user ? <Blogs /> : <Redirect to="/login" />}
