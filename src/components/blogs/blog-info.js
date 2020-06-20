@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
 import { useRouteMatch } from 'react-router-dom'
 
+import BlogComments from './blog-comments'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
 
 const BlogInfo = () => {
@@ -38,18 +39,22 @@ const BlogInfo = () => {
 
   return (
     <Card>
+      <Card.Header as="h5" className="text-center">Blog discription</Card.Header>
       <Card.Body>
-        <div>{blog.url}</div>
+        <Card.Title>{blog.title} {blog.author}</Card.Title>
+        <a href={blog.url}>{blog.url}</a>
         <div>
-          {blog.likes}{' '}
+          {blog.likes} likes{' '}
           <Button variant="primary" onClick={() => addLike(blog)}>like</Button>
         </div>
-        <div>{blog.user.name}</div>
+        <div>added by {blog.user.name}</div>
         <Button
           style={userName === blog.user.login ? showButton : hideButton}
           variant="danger"
           onClick={() => deleteBlog(blog)}
         >remove</Button>
+        <Card.Title style={{ margin: '30px 0' }}>Comments</Card.Title>
+        <BlogComments comments={blog.comments} />
       </Card.Body>
     </Card>
   )

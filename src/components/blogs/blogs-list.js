@@ -43,7 +43,7 @@ const BlogsList = () => {
         <Blog key={blog.id}>
           <Link to={`/blog/${blog.id}`}>{blog.title} {blog.author}</Link>
           <ShowBlogInfo id={blog.id} buttonLabel="view">
-            <div>{blog.url}</div>
+            <a href={blog.url}>{blog.url}</a>
             <div>
               {blog.likes}{' '}
               <Button variant="primary" onClick={() => addLike(blog)}>like</Button>
