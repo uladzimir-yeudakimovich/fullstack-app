@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Button, Card } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -41,7 +40,7 @@ const BlogsList = () => {
     <Card.Body>
       {blogs.map(blog =>
         <Blog key={blog.id}>
-          <Link to={`/blog/${blog.id}`}>{blog.title} {blog.author}</Link>
+          <span>{blog.title} {blog.author}</span>{' '}
           <ShowBlogInfo id={blog.id} buttonLabel="view">
             <a href={blog.url}>{blog.url}</a>
             <div>
