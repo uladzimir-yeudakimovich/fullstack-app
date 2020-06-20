@@ -41,7 +41,7 @@ const BlogsList = () => {
     <Card.Body>
       {blogs.map(blog =>
         <Blog key={blog.id}>
-          <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
+          <Link to={`/blog/${blog.id}`}>{blog.title} {blog.author}</Link>
           <ShowBlogInfo id={blog.id} buttonLabel="view">
             <div>{blog.url}</div>
             <div>

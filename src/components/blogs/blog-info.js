@@ -8,7 +8,7 @@ import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog
 const BlogInfo = () => {
   const dispatch = useDispatch()
   const blogs = useSelector(state => state)
-  const match = useRouteMatch('/blogs/:id')
+  const match = useRouteMatch('/blog/:id')
   const blog = match
     ? blogs.find(el => el.id === match.params.id)
     : null

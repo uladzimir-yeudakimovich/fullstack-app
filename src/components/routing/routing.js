@@ -14,6 +14,7 @@ import Login from '../auth/login'
 import PhoneBook from '../phone-book/index'
 import Registration from '../auth/registration'
 import Users from '../users/index'
+import UserInfo from '../users/user-info'
 
 const Routing = ({ user }) => {
   if (!user) {
@@ -25,7 +26,7 @@ const Routing = ({ user }) => {
       <Route path="/anecdotes">
         {user ? <Anecdotes /> : <Redirect to="/login" />}
       </Route>
-      <Route path="/blogs/:id">
+      <Route path="/blog/:id">
         {user ?
           <Provider store={blogsStore}>
             <BlogInfo />
@@ -35,6 +36,9 @@ const Routing = ({ user }) => {
       </Route>
       <Route path="/blogs">
         {user ? <Blogs /> : <Redirect to="/login" />}
+      </Route>
+      <Route path="/user/:id">
+        {user ? <UserInfo /> : <Redirect to="/login" />}
       </Route>
       <Route path="/users">
         {user ? <Users /> : <Redirect to="/login" />}

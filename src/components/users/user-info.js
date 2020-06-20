@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Card, Table } from 'react-bootstrap'
+import { useRouteMatch } from 'react-router-dom'
 
 import service from '../shared/service'
 
-const Users = () => {
+const UserInfo = () => {
   const [ users, setUsers ] = useState([])
+  const match = useRouteMatch('/user/:id')
+  const user = match
+    ? users.find(el => el.id === match.params.id)
+    : null
 
   useEffect(() => {
     service.setToken(JSON.parse(window.localStorage.getItem('_at')))
@@ -15,22 +19,21 @@ const Users = () => {
       })
   }, [])
 
+  if (!user) {
+    return (<></>)
+  }
+
   return (
     <Card>
-      <Card.Header as="h5" className="text-center">Users</Card.Header>
+      <Card.Header as="h5" className="text-center">{user.name}</Card.Header>
       <Card.Body>
+        <Card.Title>{user.author}</Card.Title>
+        <Card.Title>added blogs</Card.Title>
         <Table striped>
           <tbody>
-            <tr>
-              <td></td>
-              <td className="text-center">blogs created</td>
-            </tr>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td>
-                  <Link to={`/user/${user.id}`}>{user.name}</Link>
-                </td>
-                <td className="text-center">{user.blogs.length}</td>
+            {user.blogs.map(blog => (
+              <tr key={blog._id}>
+                <td>{blog.title}</td>
               </tr>
             ))}
           </tbody>
@@ -40,4 +43,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default UserInfo
