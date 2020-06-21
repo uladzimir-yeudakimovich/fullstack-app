@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap'
 import { useRouteMatch } from 'react-router-dom'
 
 import BlogComments from './blog-comments'
+import CommentForm from './comment-form'
 import { initializeBlogs, removeBlog, addLikeForBlog } from '../../reducers/blog-reducer'
 
 const BlogInfo = () => {
@@ -53,7 +54,8 @@ const BlogInfo = () => {
           variant="danger"
           onClick={() => deleteBlog(blog)}
         >remove</Button>
-        <Card.Title style={{ margin: '30px 0' }}>Comments</Card.Title>
+        <Card.Title style={{ margin: '30px 0 10px' }}>Comments</Card.Title>
+        <CommentForm id={blog.id} />
         <BlogComments comments={blog.comments} />
       </Card.Body>
     </Card>
