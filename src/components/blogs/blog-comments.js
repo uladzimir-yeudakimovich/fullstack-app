@@ -1,23 +1,21 @@
 import React from 'react'
-import { Card, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 
 const BlogComments = ({ comments }) => {
-  if (!comments) {
+  if (!comments.length) {
     return (<><p>No comments yet, be the first to do it</p></>)
   }
 
   return (
-    <Card>
-      <Table striped>
-        <tbody>
-          {comments.map(comment => (
-            <tr key={comment._id}>
-              <td>{comment.title}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Card>
+    <Table striped>
+      <tbody>
+        {comments.map(el => (
+          <tr key={el.id}>
+            <td>{el.comment}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   )
 }
 

@@ -20,10 +20,10 @@ const blogReducer = (state = [], action) => {
     return sort(state.map(el => el.id === id ? newBlog : el))
   }
   case 'ADD_COMMENT': {
-    console.log(action.data)
-    // const id = action.data.id
-    // const newBlog = action.data
-    return state
+    const { blogId, id, comment } = action.data
+    let updateBlog = state.find(el => el.id === blogId)
+    updateBlog.comments = updateBlog.comments ? updateBlog.comments.concat([{ id, comment }]) : [{ id, comment }]
+    return state.map(el => el.id === blogId ? updateBlog : el)
   }
   default:
     return state
